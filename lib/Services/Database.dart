@@ -15,8 +15,10 @@ class DatabaseServices {
             .toList());
   }
 
-  void onPressed() {
-    db.collection("users").get().then((querySnapshot) {
+  geStreamEvents() {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    db.collection("StreamEvents").get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         print(result.data());
       });

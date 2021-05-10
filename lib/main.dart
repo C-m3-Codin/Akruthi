@@ -1,6 +1,7 @@
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/NotificationTry.dart';
 import 'package:akruthi/Services/Database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -89,9 +90,11 @@ class _MyAppState extends State<MyApp> {
     });
 
     getToken();
+    // DatabaseServices ab = new DatabaseServices();
     DatabaseServices ab = new DatabaseServices();
     ab.geStreamEvents();
-    print("\n\n\n\n\nEachEvent ${list[0].eventName}");
+
+    // print("\n\n\n\n\nEachEvent ${list[0].eventName}");
   }
 
   @override
