@@ -1,4 +1,6 @@
+import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/NotificationTry.dart';
+import 'package:akruthi/Services/Database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +54,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<StreamingEvents> list;
   @override
   void initState() {
     // TODO: implement initState
@@ -86,6 +89,9 @@ class _MyAppState extends State<MyApp> {
     });
 
     getToken();
+    DatabaseServices ab = new DatabaseServices();
+    ab.geStreamEvents();
+    print("\n\n\n\n\nEachEvent ${list[0].eventName}");
   }
 
   @override
