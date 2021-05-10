@@ -36,7 +36,14 @@ Future<void> main() async {
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-  runApp(MyApp());
+  runApp(MApp());
+}
+
+class MApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: MyApp());
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -83,7 +90,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("bam"),
+      ),
+      body: Center(
+        child: Text("asd"),
+      ),
+    );
   }
 
   getToken() async {

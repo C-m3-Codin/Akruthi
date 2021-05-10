@@ -32,6 +32,7 @@ dependencies:
   overlay_support: ^1.2.1
   flutter_local_notifications: ^5.0.0+4
   http: ^0.13.3
+  carousel_slider: ^3.0.0
 
 dev_dependencies:
   flutter_test:
