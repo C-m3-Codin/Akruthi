@@ -9,14 +9,14 @@ import 'dart:convert';
 // String streamingEventsToJson(StreamingEvents data) =>json.encode(data.toJson());
 
 class StreamingEvents {
-  StreamingEvents({
-    this.eventName,
-    this.streamTime,
-    this.over,
-    this.imageUrl,
-    this.eventRedirect,
-    this.happening,
-  });
+  StreamingEvents(
+      {this.eventName,
+      this.streamTime,
+      this.over,
+      this.imageUrl,
+      this.eventRedirect,
+      this.happening,
+      this.redirectUrl});
 
   String eventName;
   String streamTime;
@@ -24,16 +24,17 @@ class StreamingEvents {
   String imageUrl;
   String eventRedirect;
   String happening;
+  String redirectUrl;
 
   factory StreamingEvents.fromJson(Map<String, dynamic> json) =>
       StreamingEvents(
-        eventName: json["EventName"],
-        streamTime: json["StreamTime"],
-        over: json["Over"],
-        imageUrl: json["ImageUrl"],
-        eventRedirect: json["EventRedirect"],
-        happening: json["Happening"],
-      );
+          eventName: json["EventName"],
+          streamTime: json["StreamTime"],
+          over: json["Over"],
+          imageUrl: json["ImageUrl"],
+          eventRedirect: json["EventRedirect"],
+          happening: json["Happening"],
+          redirectUrl: json["RedirectUrl"]);
 
   Map<String, dynamic> toJson() => {
         "EventName": eventName,

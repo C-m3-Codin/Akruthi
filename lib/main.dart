@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:convert';
+
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:overlay_support/overlay_support.dart';
 
 // FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -68,7 +70,7 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      postByPostPath("asd").then((value) {
+      streamingEvents().then((value) {
         list = value;
         setState(() {});
       });
@@ -127,30 +129,9 @@ class _MyAppState extends State<MyApp> {
                 // ),
                 body: Column(
               children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //     Container(
-                //       color: Colors.blue[400],
-                //       height: 200,
-                //       width: width * .6,
-                //       // child: Text(list[0].eventName),
-                //     ),
-                //     Container(
-                //       color: Colors.red,
-                //       height: 200,
-                //     ),
-                //     Container(
-                //       color: Colors.red,
-                //       height: 200,
-                //     )
-                //   ],
-                // ),
-
                 CarouselSlider(
                   options: CarouselOptions(
-                    height: height * .2,
+                    height: height * .3,
                     aspectRatio: 16 / 9,
                     viewportFraction: 0.8,
                     initialPage: 0,
@@ -164,27 +145,73 @@ class _MyAppState extends State<MyApp> {
                     onPageChanged: (a, b) => print("asd"),
                     scrollDirection: Axis.horizontal,
                   ),
-                  items: [1, 2, 3, 4, 5].map((i) {
+                  items: list.map((i) {
                     return Builder(
                       builder: (BuildContext context) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(color: Colors.amber),
-                            child: Text(
-                              'text $i',
-                              style: TextStyle(fontSize: 16.0),
-                            ));
+                        return GestureDetector(
+                          onTap: () async {
+                            // () async {
+                            await launch(i.redirectUrl);
+                            // },
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(color: Colors.amber),
+                                child: Image.network(
+                                  i.imageUrl,
+                                  // width: width * .4,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                        );
                       },
                     );
                   }).toList(),
+                ),
+                SizedBox(
+                  height: height * .010,
+                ),
+
+                GestureDetector(
+                    onTap: () async {
+                      // () async {
+                      await launch('https://discord.gg/QkkDwuC86w');
+                      // },
+                    },
+                    child: Container(
+                      height: height * .08,
+                      child: Image.network(
+                        "https://firebasestorage.googleapis.com/v0/b/akruthi-e3f25.appspot.com/o/discord.png?alt=media&token=764993f7-2270-4315-a464-93854179a458",
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+                //   ],
+                // ),
+                SizedBox(
+                  height: height * .010,
                 ),
 
                 Container(
                   color: Colors.green,
                   child: Center(
-                    child: Text("Others"),
+                    child: Text(
+                      "OtherEvents",
+                      style: TextStyle(fontSize: 40),
+                    ),
                   ),
+                ),
+
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return ListTile(
+                          title: Text(list[index].eventName),
+                        );
+                      }),
                 )
               ],
             )),

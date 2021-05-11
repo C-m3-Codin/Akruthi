@@ -30,9 +30,9 @@ class DatabaseServices {
   }
 }
 
-Future<List<StreamingEvents>> postByPostPath(String postPath) async {
-  List<StreamingEvents> postFromFirebase = [];
-  print(postPath);
+Future<List<StreamingEvents>> streamingEvents() async {
+  List<StreamingEvents> streamEventList = [];
+  // print(postPath);
   print("\n\n");
   await FirebaseFirestore.instance
       .collection("StreamEvents")
@@ -40,11 +40,30 @@ Future<List<StreamingEvents>> postByPostPath(String postPath) async {
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
       // print(element.data()['title']);
-      postFromFirebase.add(
+      streamEventList.add(
           StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
     });
   });
 
   // print('retrieved: ${postFromFirebase.eventName}');
-  return postFromFirebase;
+  return streamEventList;
+}
+
+Future<List<StreamingEvents>> generalEventList() async {
+  List<StreamingEvents> streamEventList = [];
+  // print(postPath);
+  print("\n\n");
+  await FirebaseFirestore.instance
+      .collection("generalEvents")
+      .get()
+      .then((querysnapshot) {
+    querysnapshot.docs.forEach((element) {
+      // print(element.data()['title']);
+      streamEventList.add(
+          StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+    });
+  });
+
+  // print('retrieved: ${postFromFirebase.eventName}');
+  return streamEventList;
 }
