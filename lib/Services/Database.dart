@@ -41,7 +41,8 @@ Future<List<StreamingEvents>> streamingEvents() async {
     querysnapshot.docs.forEach((element) {
       // print(element.data()['title']);
       streamEventList.add(
-          StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+          // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+          StreamingEvents.fromJson(element.data()));
     });
   });
 

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 // StreamingEvents streamingEventsFromJson(String str) =>StreamingEvents.fromJson(json.decode(str));
 //
 // String streamingEventsToJson(StreamingEvents data) =>json.encode(data.toJson());
@@ -16,7 +18,8 @@ class StreamingEvents {
       this.imageUrl,
       this.eventRedirect,
       this.happening,
-      this.redirectUrl});
+      this.redirectUrl,
+      this.time});
 
   String eventName;
   String streamTime;
@@ -25,14 +28,17 @@ class StreamingEvents {
   String eventRedirect;
   String happening;
   String redirectUrl;
+  Timestamp time;
 
   factory StreamingEvents.fromJson(Map<String, dynamic> json) =>
       StreamingEvents(
+          // time: json["time"],
           eventName: json["EventName"],
           streamTime: json["StreamTime"],
           over: json["Over"],
           imageUrl: json["ImageUrl"],
           eventRedirect: json["EventRedirect"],
+          time: json["time"],
           happening: json["Happening"],
           redirectUrl: json["RedirectUrl"]);
 
