@@ -36,6 +36,7 @@ dependencies:
   cloud_firestore: ^1.0.4
   url_launcher: ^6.0.3
   awesome_dialog: ^2.0.0
+  font_awesome_flutter: ^9.0.0
 
 dev_dependencies:
   flutter_test:

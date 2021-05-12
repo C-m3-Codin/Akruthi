@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
+import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/LiveStreams.dart';
 import 'package:akruthi/NotificationTry.dart';
 import 'package:akruthi/Services/Database.dart';
@@ -135,6 +136,9 @@ class _MyAppState extends State<MyApp> {
                 //   title: Text("bam"),
                 // ),
                 body: Container(
+                    // color: Color(0xFF42A5F5),
+                    color: Colors.red[800],
+                    padding: EdgeInsets.all(10),
                     child: new SingleChildScrollView(
                         physics: ScrollPhysics(),
                         child: Column(
@@ -220,28 +224,42 @@ class EachEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: new BoxDecoration(
-              image: new DecorationImage(
-                  image: new NetworkImage(list[ind].imageUrl),
-                  fit: BoxFit.cover)),
-          child: new Center(
-            child: new ClipRect(
-              child: new SizedBox(
-                height: 200.0,
-                width: 200.0,
-                child: new BackdropFilter(
-                  filter: new ImageFilter.blur(
-                    sigmaX: 2.0,
-                    sigmaY: 2.0,
-                  ),
-                  child: new Center(
-                    child: new Text(
-                      list[ind].eventName,
-                      style: TextStyle(color: Colors.amber[600]),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EventPage(
+                    event: list[ind],
+                  )),
+        );
+      },
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 0, 5),
+          child: Container(
+            height: height * .3,
+            width: width * .5,
+            decoration: new BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                image: new DecorationImage(
+                    image: new NetworkImage(list[ind].imageUrl),
+                    fit: BoxFit.cover)),
+            child: new Center(
+              child: new ClipRect(
+                child: new SizedBox(
+                  height: height * .3,
+                  width: width * .5,
+                  child: new BackdropFilter(
+                    filter: new ImageFilter.blur(
+                      sigmaX: 2.0,
+                      sigmaY: 2.0,
+                    ),
+                    child: new Center(
+                      child: new Text(
+                        list[ind].eventName,
+                        style: TextStyle(color: Colors.amber[600]),
+                      ),
                     ),
                   ),
                 ),
@@ -292,7 +310,7 @@ class CmReliefFund extends StatelessWidget {
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0),
             ),
-            primary: Colors.yellow),
+            primary: Colors.yellow[700]),
         onPressed: () async {
           String upiurl =
               'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';

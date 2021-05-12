@@ -50,21 +50,32 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                     child: Stack(children: [
                       Image.network(widget.list[index].imageUrl),
                       widget.list[index].happening == "Yes"
-                          ? Row(
-                              children: [
-                                SizedBox(
-                                  width: 40,
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Container(
+                                color: Colors.yellow,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    Text(
+                                      "Live ",
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
+                                    Icon(
+                                      Icons.live_tv,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "Live ",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                                Icon(
-                                  Icons.live_tv,
-                                  color: Colors.red,
-                                )
-                              ],
+                              ),
                             )
                           : Container(),
                     ])),
