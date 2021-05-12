@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/LiveStreams.dart';
 import 'package:akruthi/NotificationTry.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<StreamingEvents> list = [];
+  List<RegEvent> regularEvent = [];
   QuerySnapshot querySnapshot;
   @override
   void initState() {
@@ -75,6 +77,13 @@ class _MyAppState extends State<MyApp> {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       streamingEvents().then((value) {
         list = value;
+        setState(() {});
+      });
+
+      print("done List");
+
+      generalEventList().then((value) {
+        regularEvent = value;
         setState(() {});
       });
     });
@@ -148,35 +157,11 @@ class _MyAppState extends State<MyApp> {
                               // color: Colors.green,
                               child: Center(
                                 child: Text(
-                                  "OtherEvents ${list.length}",
-                                  style: TextStyle(fontSize: 40),
+                                  "OtherEvents ${regularEvent.length}",
+                                  style: TextStyle(fontSize: 20),
                                 ),
                               ),
                             ),
-
-                            // Expanded(
-                            // child:
-                            // ListView.builder(
-                            //     // physics: NeverScrollableScrollPhysics(),
-                            //     // shrinkWrap: true,
-                            //     physics: NeverScrollableScrollPhysics(),
-                            //     shrinkWrap: true,
-                            //     itemCount: list.length,
-                            //     itemBuilder: (BuildContext context, index) {
-                            //       if (index == 4) {
-                            //         return Column(
-                            //           children: [
-                            //             DiscordJoin(),
-                            //             ListTile(
-                            //               title: Text(list[index].eventName),
-                            //             )
-                            //           ],
-                            //         );
-                            //       }
-                            //       return ListTile(
-                            //         title: Text(list[index].eventName),
-                            //       );
-                            //     }),
 
                             GridView.count(
                               physics: NeverScrollableScrollPhysics(),
@@ -186,8 +171,10 @@ class _MyAppState extends State<MyApp> {
                               crossAxisCount: 2,
                               // Generate 100 widgets that display their index in the List.
                               children: List.generate(
-                                  ((list.length) * .5).round(), (index) {
-                                return EachEvent(list: list, ind: index);
+                                  ((regularEvent.length) * .5).round(),
+                                  (index) {
+                                return EachEvent(
+                                    list: regularEvent, ind: index);
                               }),
                             ),
 
@@ -201,9 +188,11 @@ class _MyAppState extends State<MyApp> {
                               crossAxisCount: 2,
                               // Generate 100 widgets that display their index in the List.
                               children: List.generate(
-                                  ((list.length) * .5).toInt(), (index) {
-                                int ind = (list.length * .5).toInt() + index;
-                                return EachEvent(list: list, ind: ind);
+                                  ((regularEvent.length) * .5).toInt(),
+                                  (index) {
+                                int ind =
+                                    (regularEvent.length * .5).toInt() + index;
+                                return EachEvent(list: regularEvent, ind: ind);
                               }),
                             ),
 
@@ -226,7 +215,7 @@ class EachEvent extends StatelessWidget {
     @required this.ind,
   }) : super(key: key);
 
-  final List<StreamingEvents> list;
+  final List<RegEvent> list;
   final int ind;
 
   @override
@@ -260,37 +249,6 @@ class EachEvent extends StatelessWidget {
             ),
           ),
         ),
-
-        //  Stack(
-        //   children: [
-        //     Image.network(
-        //       list[index].imageUrl,
-        //       height: 200,
-        //       width: 200,
-        //       fit: BoxFit.cover,
-        //     ),
-        //     Container(
-        //       height: 200,
-        //       width: 200,
-        //       // width: _width,
-        //       // height: _height,
-        //       child: BackdropFilter(
-        //         filter: ImageFilter.blur(
-        //             sigmaX: 0.60, sigmaY: 0.60),
-        //         // ImageFilter.blur(
-        //         // sigmaX: 0.0, sigmaY: 0.0),
-        //         child: Container(
-        //           color:
-        //               Colors.black.withOpacity(.10),
-        //         ),
-        //       ),
-        //     ),
-        //     Text(
-        //         'Item ${(list.length * .5).toInt() + index}',
-        //         style:
-        //             TextStyle(color: Colors.red)),
-        //   ],
-        // ),
       ),
     );
   }

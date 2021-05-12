@@ -1,3 +1,4 @@
+import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
@@ -50,8 +51,8 @@ Future<List<StreamingEvents>> streamingEvents() async {
   return streamEventList;
 }
 
-Future<List<StreamingEvents>> generalEventList() async {
-  List<StreamingEvents> streamEventList = [];
+Future<List<RegEvent>> generalEventList() async {
+  List<RegEvent> regularEvent = [];
   // print(postPath);
   print("\n\n");
   await FirebaseFirestore.instance
@@ -59,12 +60,13 @@ Future<List<StreamingEvents>> generalEventList() async {
       .get()
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
+      print("\n\n\n\n\n${element.data().toString()}\n\n\n\n\n\n");
       // print(element.data()['title']);
-      streamEventList.add(
-          StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+      regularEvent.add(RegEvent.fromJson(element.data()));
     });
   });
 
   // print('retrieved: ${postFromFirebase.eventName}');
-  return streamEventList;
+  print("\n\n\n\n\n\nHere\n$regularEvent\n\n\n\n\n\n\n\n\n");
+  return regularEvent;
 }
