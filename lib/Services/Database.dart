@@ -12,7 +12,7 @@ class DatabaseServices {
   geDateofMatche() {
     return db
         .collection("StreamEvents")
-        .orderBy("Time", descending: true)
+        .orderBy("time", descending: true)
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((documents) => StreamingEvents.fromJson(documents.data()))
@@ -22,7 +22,11 @@ class DatabaseServices {
   geStreamEvents() {
     FirebaseFirestore db = FirebaseFirestore.instance;
     List<StreamingEvents> data = [];
-    db.collection("StreamEvents").get().then((querySnapshot) {
+    db
+        .collection("StreamEvents")
+        .orderBy("time", descending: true)
+        .get()
+        .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         // data.add(StreamingEvents.fromJson(json.decode(result.data())));
         data.add(
@@ -37,15 +41,32 @@ Future<List<StreamingEvents>> streamingEvents() async {
   List<StreamingEvents> streamEventList = [];
   // print(postPath);
   print("\n\n");
+  String happening = "No";
   await FirebaseFirestore.instance
       .collection("StreamEvents")
+      .orderBy("time", descending: false)
       .get()
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
       // print(element.data()['title']);
-      streamEventList.add(
-          // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
-          StreamingEvents.fromJson(element.data()));
+      if (happening == "No") {
+        print(
+            "\n\n\n\nchecking ${element.data()["Happening"]}      ${element.data()["EventName"]}\n\n\n\n");
+        if (element.data()["Happening"] == "Yes") {
+          happening = "Yes";
+          print(
+              "\n\n\n\n\nadded to event ${element.data()["EventName"]}\n\n\n\n");
+          streamEventList.add(
+              // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+              StreamingEvents.fromJson(element.data()));
+        }
+      } else {
+        print(
+            "\n\n\n\n\nadded to event ${element.data()["EventName"]}\n\n\n\n");
+        streamEventList.add(
+            // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+            StreamingEvents.fromJson(element.data()));
+      }
     });
   });
 

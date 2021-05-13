@@ -10,6 +10,7 @@ import 'package:akruthi/Services/Database.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -20,7 +21,7 @@ import 'package:url_launcher/url_launcher.dart';
 // import 'package:overlay_support/overlay_support.dart';
 
 // FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
+// String ass = "appp";
 double width;
 double height;
 
@@ -59,7 +60,7 @@ Future<void> main() async {
 class MApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyApp());
+    return MaterialApp(theme: ThemeData.dark(), home: MyApp());
   }
 }
 
@@ -132,13 +133,17 @@ class _MyAppState extends State<MyApp> {
           )
         : SafeArea(
             child: Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  // backgroundColor: Colors.yellow[700],
 
-                // appBar: AppBar(
-                //   title: Text("bam"),
-                // ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.yellow[700],
+                    radius: 100,
+                    child: Image.asset('assets/prize.png', width: 30),
+                  ),
+                  onPressed: () {},
+                ),
                 body: Container(
-                    // color: Color(0xFF42A5F5),
-                    color: Colors.red[800],
                     padding: EdgeInsets.all(10),
                     child: new SingleChildScrollView(
                         physics: ScrollPhysics(),
@@ -284,18 +289,26 @@ class DiscordJoin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Colors.white),
+        style: ElevatedButton.styleFrom(
+            elevation: 20,
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
+            // primary: Colors.yellow[700]),
+            primary: Colors.yellow[700]),
         onPressed: () async {
-          String upiurl =
-              'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';
+          String upiurl = 'https://discord.gg/795n5nhP';
           await launch(upiurl);
         },
-        child: Container(
-          height: height * .08,
-          child: Image.network(
-            "https://firebasestorage.googleapis.com/v0/b/akruthi-e3f25.appspot.com/o/discord.png?alt=media&token=764993f7-2270-4315-a464-93854179a458",
-            fit: BoxFit.cover,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Join Our Discord",
+              style: TextStyle(color: Colors.black),
+            ),
+            Image.asset('assets/disc.png', width: 45)
+          ],
         ));
   }
 }
@@ -310,19 +323,27 @@ class CmReliefFund extends StatelessWidget {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             elevation: 20,
-            // minimumSize: Size,
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0),
             ),
+            // primary: Colors.yellow[700]),
             primary: Colors.yellow[700]),
         onPressed: () async {
           String upiurl =
               'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';
           await launch(upiurl);
+          // String upiurl = 'https://discord.gg/Kce6chxm';
+          // await launch(upiurl);
         },
-        child: Text(
-          "Donate to CM Relief Fund",
-          style: TextStyle(color: Colors.black),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Donate to CM Relief Fund",
+              style: TextStyle(color: Colors.black),
+            ),
+            // Image.asset('assets/disc.png', width: 45)
+          ],
         ));
   }
 }

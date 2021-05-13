@@ -3,6 +3,7 @@ import 'package:akruthi/main.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HorizontalImages extends StatefulWidget {
   List<StreamingEvents> list;
@@ -14,7 +15,7 @@ class HorizontalImages extends StatefulWidget {
 class _HorizontalImagesState extends State<HorizontalImages> {
   @override
   Widget build(BuildContext context) {
-    widget.list.add(widget.list[0]);
+    // widget.list.add(widget.list[0]);
     return Container(
       // height: 370.0,
       height: height * .4,
@@ -48,7 +49,17 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Stack(children: [
-                      Image.network(widget.list[index].imageUrl),
+                      Stack(
+                        children: <Widget>[
+                          Center(child: CircularProgressIndicator()),
+                          Center(
+                            child: FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image: widget.list[index].imageUrl,
+                            ),
+                          ),
+                        ],
+                      ),
                       widget.list[index].happening == "Yes"
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
