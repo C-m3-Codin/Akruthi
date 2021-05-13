@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/EventPage.dart';
@@ -225,13 +226,16 @@ class EachEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        EventDetails eventDeets = await fetchAlbum(list[ind].sheet);
+
+        print("\n\n\n\n\ ${list.toString()} \n\n\n\n\n\n\n\n\n\n");
+
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => EventPage(
-                    event: list[ind],
-                  )),
+              builder: (context) =>
+                  EventPage(event: list[ind], eventDeets: eventDeets)),
         );
       },
       child: Center(

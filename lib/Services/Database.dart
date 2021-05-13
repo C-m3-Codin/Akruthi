@@ -1,7 +1,9 @@
+import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class DatabaseServices {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -69,4 +71,23 @@ Future<List<RegEvent>> generalEventList() async {
   // print('retrieved: ${postFromFirebase.eventName}');
   print("\n\n\n\n\n\nHere\n$regularEvent\n\n\n\n\n\n\n\n\n");
   return regularEvent;
+}
+
+Future<EventDetails> fetchAlbum(String sheetLink) async {
+  // final response = await http.get(Uri.https(sheetLink,
+  //     '/macros/s/AKfycbwR3Iv5tCnJYFOZPBsGZFLZdyJdXjFrAxGH2iF-o4AiNwFHsMg71C7UPgCfz2F_WyKDXQ/exec?sheetID=1IiNLptM1TgGBgk1EkHbbsMCZveyFBRDk1IGMSlNNjxo&eventName=event1'));
+
+  var url = Uri.parse(sheetLink);
+  var response = await http.get(url);
+  if (response.statusCode == 200) {
+    print(
+        "\n\n\n\n\n\n\n\n\n\n from 82\n\n ${response.body}\n\n\\n\n\n\n\n\n\n\n\\n\n\n");
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return EventDetails.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
 }
