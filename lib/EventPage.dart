@@ -2,6 +2,7 @@ import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/Services/Database.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventPage extends StatefulWidget {
   EventPage({this.event, this.eventDeets});
@@ -14,28 +15,264 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
+  List<String> rules = ['rule 1', 'rule2', 'rule3', 'rule2', 'rule3'];
+  List<String> participantNames = [
+    'participant1',
+    'participant2',
+    'participant3',
+    'participant4',
+    'participant1',
+    'participant2',
+    'participant3',
+    'participant1',
+    'participant2',
+    'participant3',
+  ];
+  List<Widget> ruleWidgets = [];
+  List<Widget> participantWidgets = [];
+  String c1name = 'Cyril Paul',
+      c1number = '9207585032',
+      c2name = 'Cyril Paul',
+      c2number = '9207585032';
+
+  var width;
+  var height;
+
+  setupWidgets() {
+    ruleWidgets = [
+      Padding(
+        padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
+        child: Text('RULES AND REGULATIONS',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+      )
+    ];
+    participantWidgets = [];
+
+    for (var rule in rules) {
+      ruleWidgets.add(
+        Material(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+            child: Card(
+              child: ListTile(
+                title: Text(
+                    'yeah there yeah there yeah there yeah there yeah there yeah there yeah there yeah there yeah there yeah there'),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    for (var participant in participantNames) {
+      participantWidgets.add(
+        Material(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+            child: Card(
+              child: ListTile(
+                title: Text(participant),
+                subtitle: Text(participant),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  rulesDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              elevation: 5,
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
+              child: SingleChildScrollView(
+                child: Container(
+                  // color: Theme.of(context).cardColor,
+                  child: Column(
+                    children: ruleWidgets,
+                  ),
+                ),
+              ));
+        });
+  }
+
+  participantsDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              elevation: 5,
+              insetPadding:
+                  EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
+                    child: Text('PARTICIPANTS',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w600)),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: participantWidgets,
+                      ),
+                    ),
+                  ),
+                ],
+              ));
+        });
+  }
+
+  _launchURL(String url) async {
+    await launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
+    setupWidgets();
+    width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.network(widget.event.imageUrl),
-            Text(widget.eventDeets.name)
-          ],
-        ),
+        body: SafeArea(
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Container(
+              height: height * .5,
+              width: width,
+              decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  image: new DecorationImage(
+                      image: new NetworkImage(
+                          'https://cdn.mos.cms.futurecdn.net/z2h27zgGgvoKangfuV5G7H-1200-80.jpg'),
+                      fit: BoxFit.cover)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: Text(
+              'Stay Home Stay Stylish',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              'Description goes here Description goes here Description goes here Descripon goes here Desction goes herription goes here Description goes here ',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+            ),
+          ),
+          // Text(
+          //   'Rules',
+          //   textAlign: TextAlign.left,
+          //   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          // ),
+          TextButton(
+            onPressed: rulesDialog,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: ListTile(
+                leading: Icon(
+                  Icons.rule,
+                  color: Colors.blue[50],
+                ),
+                title: Text(
+                  'RULES AND REGULATIONS',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+                tileColor: Theme.of(context).backgroundColor,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: participantsDialog,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: ListTile(
+                leading: Icon(
+                  Icons.multiple_stop,
+                  color: Colors.blue[50],
+                ),
+                title: Text(
+                  'PARTICIPANTS',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+                tileColor: Theme.of(context).backgroundColor,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: null,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.blue[50],
+                ),
+                title: Text(
+                  c1name,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.call, color: Colors.blue[200]),
+                        onPressed: () {
+                          _launchURL('tel:+91' + c1number);
+                        }),
+                    IconButton(
+                        icon: Icon(Icons.message, color: Colors.green),
+                        onPressed: () {
+                          _launchURL('https://wa.me/+91' + c1number);
+                        }),
+                  ],
+                ),
+                tileColor: Theme.of(context).backgroundColor,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: null,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.blue[50],
+                ),
+                title: Text(
+                  c1name,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.call, color: Colors.blue[200]),
+                        onPressed: () {}),
+                    IconButton(
+                        icon: Icon(Icons.message, color: Colors.green),
+                        onPressed: () {}),
+                  ],
+                ),
+                tileColor: Theme.of(context).backgroundColor,
+              ),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          var list = await fetchAlbum(
-              "https://script.google.com/macros/s/AKfycbwR3Iv5tCnJYFOZPBsGZFLZdyJdXjFrAxGH2iF-o4AiNwFHsMg71C7UPgCfz2F_WyKDXQ/exec?sheetID=1IiNLptM1TgGBgk1EkHbbsMCZveyFBRDk1IGMSlNNjxo&eventName=event1");
-
-          print("\n\n\n\n\ ${list.toString()} \n\n\n\n\n\n\n\n\n\n");
-        },
-      ),
-    );
+    ));
   }
 }
