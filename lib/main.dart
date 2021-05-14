@@ -7,6 +7,7 @@ import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/LiveStreams.dart';
 import 'package:akruthi/NotificationTry.dart';
 import 'package:akruthi/Services/Database.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -252,7 +253,10 @@ class EachEvent extends StatelessWidget {
             decoration: new BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 image: new DecorationImage(
-                    image: new NetworkImage(list[ind].imageUrl),
+                    image: CachedNetworkImageProvider(
+                      list[ind].imageUrl,
+                    ),
+                    //  new NetworkImage(list[ind].imageUrl),
                     fit: BoxFit.cover)),
             child: new Center(
               child: new ClipRect(
