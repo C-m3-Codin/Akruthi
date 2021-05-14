@@ -5,13 +5,14 @@ import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/LiveStreams.dart';
-import 'package:akruthi/NotificationTry.dart';
+// import 'package:akruthi/NotificationTry.dart';
 import 'package:akruthi/Services/Database.dart';
+import 'package:bordered_text/bordered_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
+// import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -269,10 +270,32 @@ class EachEvent extends StatelessWidget {
                       sigmaY: 2.0,
                     ),
                     child: new Center(
-                      child: new Text(
-                        list[ind].eventName,
-                        style: TextStyle(color: Colors.amber[600]),
+                      child: BorderedText(
+                        strokeWidth: 4.0,
+                        // strokeColor: Color(0xF2AA4CFF),
+                        strokeColor: Colors.black,
+                        child: Text(
+                          list[ind].eventName,
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                blurRadius: 10.0,
+                                // color: Colors.red,
+                                offset: Offset(5.0, 10.0),
+                              ),
+                            ],
+                            color: Colors.yellow[700],
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
+
+                      //  new Text(
+                      // list[ind].eventName,
+                      // style: TextStyle(color: Colors.amber[600]),
+                      // ),
                     ),
                   ),
                 ),
