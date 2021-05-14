@@ -5,6 +5,7 @@ import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/LiveStreams.dart';
+import 'package:akruthi/ScoreCard.dart';
 // import 'package:akruthi/NotificationTry.dart';
 import 'package:akruthi/Services/Database.dart';
 import 'package:bordered_text/bordered_text.dart';
@@ -143,7 +144,10 @@ class _MyAppState extends State<MyApp> {
                     radius: 100,
                     child: Image.asset('assets/prize.png', width: 30),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ScoreCard()));
+                  },
                 ),
                 body: Container(
                     padding: EdgeInsets.all(10),
