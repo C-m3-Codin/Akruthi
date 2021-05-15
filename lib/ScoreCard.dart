@@ -47,104 +47,102 @@ class _ScoreCardState extends State<ScoreCard> {
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.cover,
       ),
-      scores.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : Scaffold(
-              appBar: AppBar(centerTitle: true, title: Text("Score Board")),
-              backgroundColor: Colors.transparent,
-              body: RefreshIndicator(
-                onRefresh: getSheetData,
-                child: ListView.builder(
-                    itemCount: scores.length,
-                    itemBuilder: (context, index) {
-                      if (index != 0) {
-                        var dif =
-                            scores[index].points - scores[index - 1].points;
-                        if (dif == 0) {
-                          dif = difference[index - 1];
-                        }
-                        difference.add(dif);
-                      } else {
-                        difference.add(0);
+      Scaffold(
+        appBar: AppBar(centerTitle: true, title: Text("Score Board")),
+        backgroundColor: Colors.transparent,
+        body: RefreshIndicator(
+          onRefresh: getSheetData,
+          child: scores.isEmpty
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemCount: scores.length,
+                  itemBuilder: (context, index) {
+                    if (index != 0) {
+                      var dif = scores[index].points - scores[index - 1].points;
+                      if (dif == 0) {
+                        dif = difference[index - 1];
                       }
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 6),
-                        child: Card(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: ListTile(
-                              tileColor: Colors.yellow[900],
-                              leading: scores[index].points == scores[0].points
-                                  ? Icon(
-                                      Icons.stars,
-                                      color: Colors.white,
-                                    )
-                                  : index < 3
-                                      ? Icon(Icons.star_outline)
-                                      : SizedBox(),
-                              title: BorderedText(
-                                strokeWidth: 4.0,
-                                strokeColor: Colors.black,
-                                child: Text(
-                                  scores[index].scoreClass,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.none,
-                                      decorationColor: Colors.red,
-                                      letterSpacing: 2.0),
+                      difference.add(dif);
+                    } else {
+                      difference.add(0);
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 6),
+                      child: Card(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: ListTile(
+                            tileColor: Colors.yellow[900],
+                            leading: scores[index].points == scores[0].points
+                                ? Icon(
+                                    Icons.stars,
+                                    color: Colors.white,
+                                  )
+                                : index < 3
+                                    ? Icon(Icons.star_outline)
+                                    : SizedBox(),
+                            title: BorderedText(
+                              strokeWidth: 4.0,
+                              strokeColor: Colors.black,
+                              child: Text(
+                                scores[index].scoreClass,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    decoration: TextDecoration.none,
+                                    decorationColor: Colors.red,
+                                    letterSpacing: 2.0),
+                              ),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleAvatar(
+                                      // backgroundColor: Theme.of(context).,
+                                      child: Text(
+                                          scores[index].points.toString())),
                                 ),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
+                                Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: CircleAvatar(
-                                        // backgroundColor: Theme.of(context).,
-                                        child: Text(
-                                            scores[index].points.toString())),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: BorderedText(
-                                        strokeWidth: 2.0,
-                                        strokeColor: Colors.black54,
-                                        child: Text(
-                                          difference[index] != 0
-                                              ? (difference[index] * -1)
-                                                      .toString() +
-                                                  '↓'
-                                              : '    ',
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: Colors.red[800],
-                                              fontSize: 20,
-                                              letterSpacing: 2.0),
-                                        ),
-                                      )
-
-                                      // Text(
-                                      //   difference[index] != 0
-                                      //       ? (difference[index] * -1).toString() + '↓'
-                                      //       : '   -',
-                                      //   style: TextStyle(
-                                      //       color: Colors.red,
-                                      //       fontWeight: FontWeight.bold),
-                                      // ),
+                                    child: BorderedText(
+                                      strokeWidth: 2.0,
+                                      strokeColor: Colors.black54,
+                                      child: Text(
+                                        difference[index] != 0
+                                            ? (difference[index] * -1)
+                                                    .toString() +
+                                                '↓'
+                                            : '    ',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.red[800],
+                                            fontSize: 20,
+                                            letterSpacing: 2.0),
                                       ),
-                                ],
-                              ),
+                                    )
+
+                                    // Text(
+                                    //   difference[index] != 0
+                                    //       ? (difference[index] * -1).toString() + '↓'
+                                    //       : '   -',
+                                    //   style: TextStyle(
+                                    //       color: Colors.red,
+                                    //       fontWeight: FontWeight.bold),
+                                    // ),
+                                    ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    }),
-              ),
-            )
+                      ),
+                    );
+                  }),
+        ),
+      )
     ]);
   }
 }

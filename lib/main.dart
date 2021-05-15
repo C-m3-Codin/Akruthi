@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:overlay_support/overlay_support.dart';
@@ -143,14 +144,14 @@ class _MyAppState extends State<MyApp> {
               fit: BoxFit.cover,
             ),
             Scaffold(
-                backgroundColor: Colors.black,
-                // backgroundColor: ,
-
+                // backgroundColor: Color.fromARGB(255, 37, 30, 62),
+                // backgroundColor: Colors.black,
+                backgroundColor: Color.fromARGB(255, 1, 31, 75),
                 floatingActionButton: FloatingActionButton(
                   // backgroundColor: Colors.yellow[700],
 
                   child: CircleAvatar(
-                    backgroundColor: Colors.yellow[700],
+                    backgroundColor: Colors.yellow[900],
                     radius: 100,
                     child: Image.asset('assets/prize.png', width: 30),
                   ),
@@ -181,12 +182,16 @@ class _MyAppState extends State<MyApp> {
                               height: height * .010,
                             ),
 
-                            Container(
-                              // color: Colors.green,
-                              child: Center(
-                                child: Text(
-                                  "OtherEvents ${regularEvent.length}",
-                                  style: TextStyle(fontSize: 20),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                // color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    "Events ${regularEvent.length}",
+                                    style:
+                                        GoogleFonts.abrilFatface(fontSize: 20),
+                                  ),
                                 ),
                               ),
                             ),
@@ -210,7 +215,7 @@ class _MyAppState extends State<MyApp> {
                               }),
                             ),
 
-                            DiscordJoin(),
+                            // DiscordJoin(),
 
                             GridView.count(
                               physics: NeverScrollableScrollPhysics(),
@@ -269,93 +274,109 @@ class EachEvent extends StatelessWidget {
         );
       },
       child: Center(
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.blueAccent,
-              ),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.,
-                children: [
-                  // Expanded(
-                  // child:
-                  Container(
-                    color: Colors.blue,
-                    // height: height * .1,
-                    // width: width * .7,
-                    // decoration: new BoxDecoration(
-                    //     // color: Colors.blue,
-
-                    //     borderRadius: BorderRadius.circular(5.0),
-                    //     image: new DecorationImage(
-                    //         image: CachedNetworkImageProvider(
-                    //           list[ind].imageUrl,
-                    //         ),
-                    //         //  new NetworkImage(list[ind].imageUrl),
-                    //         fit: BoxFit.fill)),
-
-                    child: Image(
-                        // height: 20,
-                        image: CachedNetworkImageProvider(
-                          list[ind].imageUrl,
-                        ),
-                        fit: BoxFit.cover),
-//
-                    //  new Center(
-                    //   child: new ClipRect(
-                    //     child: new SizedBox(
-                    //       height: height * .3,
-                    //       width: width * .5,
-                    //       child: new BackdropFilter(
-                    //         filter: new ImageFilter.blur(
-                    //             // sigmaX: 2.0,
-                    //             // sigmaY: 2.0,
-                    //             ),
-                    //         child: new Center(
-                    //           child: BorderedText(
-                    //             strokeWidth: 4.0,
-                    //             // strokeColor: Color(0xF2AA4CFF),
-                    //             strokeColor: Colors.black,
-                    //             child: Text(
-                    //               "",
-                    //               // list[ind].eventName,
-                    //               style: TextStyle(
-                    //                 shadows: [
-                    //                   Shadow(
-                    //                     blurRadius: 10.0,
-                    //                     // color: Colors.red,
-                    //                     offset: Offset(5.0, 10.0),
-                    //                   ),
-                    //                 ],
-                    //                 color: Colors.yellow[700],
-                    //                 // fontWeight: FontWeight.bold,
-                    //                 fontSize: 13.0,
-                    //                 fontWeight: FontWeight.bold,
-                    //               ),
-                    //             ),
-                    //           ),
-
-                    //  new Text(
-                    // list[ind].eventName,
-                    // style: TextStyle(color: Colors.amber[600]),
-                    // ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(020),
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(010),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 255, 167, 0),
                   ),
-                  // ),
-                  // SizedBox(
-                  // height: 10,
-                  // ),
-                  Container(
-                    child: Text(list[ind].eventName),
-                  )
-                ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Expanded(
+                      // child:
+                      Container(
+                        color: Colors.blue,
+
+                        child: Center(
+                          child: Image(
+
+                              // height: 20,
+                              image: CachedNetworkImageProvider(
+                                list[ind].imageUrl,
+                              ),
+                              fit: BoxFit.cover),
+                        ),
+
+//
+                        //  new Center(
+                        //   child: new ClipRect(
+                        //     child: new SizedBox(
+                        //       height: height * .3,
+                        //       width: width * .5,
+                        //       child: new BackdropFilter(
+                        //         filter: new ImageFilter.blur(
+                        //             // sigmaX: 2.0,
+                        //             // sigmaY: 2.0,
+                        //             ),
+                        //         child: new Center(
+                        //           child: BorderedText(
+                        //             strokeWidth: 4.0,
+                        //             // strokeColor: Color(0xF2AA4CFF),
+                        //             strokeColor: Colors.black,
+                        //             child: Text(
+                        //               "",
+                        //               // list[ind].eventName,
+                        //               style: TextStyle(
+                        //                 shadows: [
+                        //                   Shadow(
+                        //                     blurRadius: 10.0,
+                        //                     // color: Colors.red,
+                        //                     offset: Offset(5.0, 10.0),
+                        //                   ),
+                        //                 ],
+                        //                 color: Colors.yellow[700],
+                        //                 // fontWeight: FontWeight.bold,
+                        //                 fontSize: 13.0,
+                        //                 fontWeight: FontWeight.bold,
+                        //               ),
+                        //             ),
+                        //           ),
+
+                        //  new Text(
+                        // list[ind].eventName,
+                        // style: TextStyle(color: Colors.amber[600]),
+                        // ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                      ),
+
+                      // ),
+                      // SizedBox(
+                      // height: 10,
+                      // ),
+                      // SizedBox(
+                      // height: 5,
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Container(
+                          child: Text(
+                            list[ind].eventName,
+                            // style: TextStyle(
+                            //     color: Color.fromARGB(255, 5, 30, 62),
+                            //     fontSize: 10,
+                            //     fontStyle: FontStyle.normal
+
+                            style: GoogleFonts.montserrat(
+                                color: Colors.black, fontSize: 10.0
+                                // fontSize: 15,
+                                ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -372,28 +393,45 @@ class DiscordJoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            elevation: 20,
-            shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0),
-            ),
-            // primary: Colors.yellow[700]),
-            primary: Colors.yellow[700]),
-        onPressed: () async {
-          String upiurl = 'https://discord.gg/795n5nhP';
-          await launch(upiurl);
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              "Join Our Discord",
-              style: TextStyle(color: Colors.black),
-            ),
-            Image.asset('assets/disc.png', width: 45)
-          ],
-        ));
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              elevation: 20,
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(10.0),
+              ),
+              // primary: Colors.yellow[700]),
+              // primary: Colors.yellow[700]),
+              // primary: Color.fromARGB(255, 133, 30, 62)),
+
+              primary: Color.fromARGB(255, 255, 167, 0)),
+          // primary: Color.fromARGB(255, 238, 64, 53)),
+          onPressed: () async {
+            String upiurl = 'https://discord.gg/795n5nhP';
+            await launch(upiurl);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                " Join Discord ",
+                // style: TextStyle(color: Color.fromARGB(255, 5, 30, 62)),
+                style: GoogleFonts.montserrat(
+                  color: Colors.black,
+                  fontSize: 15,
+                ),
+              ),
+              // Text(
+              //   " Discord ou",
+              //   style: TextStyle(),
+              //   // style: TextStyle(color: Color.fromARGB(255, 5, 30, 62)),
+              //   // style: GoogleFonts.montserrat(color: Colors.black),
+              // ),
+              Image.asset('assets/disc.png', width: 45)
+            ],
+          )),
+    );
   }
 }
 
@@ -445,7 +483,7 @@ class CmReliefFund extends StatelessWidget {
           children: [
             Container(
               child: Text(
-                "Donate to CM Relief Fund",
+                "Donate for a good cause",
                 style: TextStyle(color: Colors.white, fontSize: 10),
               ),
             )

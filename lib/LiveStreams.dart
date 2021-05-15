@@ -45,9 +45,9 @@ class _HorizontalImagesState extends State<HorizontalImages> {
             },
             child: Stack(children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 20.0),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(5.0),
                     child: Stack(children: [
                       Stack(
                         children: <Widget>[
@@ -67,7 +67,7 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                                   width: 10,
                                 ),
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                   child: Container(
                                     color: Colors.red,
                                     child: Row(
