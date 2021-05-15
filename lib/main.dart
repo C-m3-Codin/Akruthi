@@ -135,7 +135,17 @@ class _MyAppState extends State<MyApp> {
             child: CircularProgressIndicator(),
           )
         : SafeArea(
-            child: Scaffold(
+            child: Stack(children: <Widget>[
+            Image.asset(
+              "assets/white2.jpg",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
+            Scaffold(
+                backgroundColor: Colors.transparent,
+                // backgroundColor: ,
+
                 floatingActionButton: FloatingActionButton(
                   // backgroundColor: Colors.yellow[700],
 
@@ -215,7 +225,7 @@ class _MyAppState extends State<MyApp> {
                             // )
                           ],
                         )))),
-          );
+          ]));
   }
 
   getToken() async {
@@ -238,8 +248,8 @@ class EachEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        EventDetails eventDeets = await fetchAlbum(list[ind].sheet);
-
+        // EventDetails eventDeets = await fetchAlbum(list[ind].sheet);
+        EventDetails eventDeets = new EventDetails();
         print("\n\n\n\n\ ${list.toString()} \n\n\n\n\n\n\n\n\n\n");
 
         Navigator.push(
@@ -358,7 +368,7 @@ class CmReliefFund extends StatelessWidget {
               borderRadius: new BorderRadius.circular(30.0),
             ),
             // primary: Colors.yellow[700]),
-            primary: Colors.yellow[700]),
+            primary: Colors.red),
         onPressed: () async {
           String upiurl =
               'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';
@@ -371,7 +381,7 @@ class CmReliefFund extends StatelessWidget {
           children: [
             Text(
               "Donate to CM Relief Fund",
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             // Image.asset('assets/disc.png', width: 45)
           ],
