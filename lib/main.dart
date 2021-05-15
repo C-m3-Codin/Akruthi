@@ -143,7 +143,7 @@ class _MyAppState extends State<MyApp> {
               fit: BoxFit.cover,
             ),
             Scaffold(
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.black,
                 // backgroundColor: ,
 
                 floatingActionButton: FloatingActionButton(
@@ -165,12 +165,14 @@ class _MyAppState extends State<MyApp> {
                         physics: ScrollPhysics(),
                         child: Column(
                           children: [
+                            CmReliefFund(),
                             HorizontalImages(list: list),
 
                             SizedBox(
                               height: height * .010,
                             ),
-                            CmReliefFund(),
+
+                            DiscordJoin(),
 
                             // DiscordJoin(),
                             //   ],
@@ -195,6 +197,10 @@ class _MyAppState extends State<MyApp> {
                               // Create a grid with 2 columns. If you change the scrollDirection to
                               // horizontal, this produces 2 rows.
                               crossAxisCount: 2,
+                              mainAxisSpacing: 2,
+                              childAspectRatio: 10 / 14,
+
+                              // main
                               // Generate 100 widgets that display their index in the List.
                               children: List.generate(
                                   ((regularEvent.length) * .5).round(),
@@ -212,13 +218,16 @@ class _MyAppState extends State<MyApp> {
                               // Create a grid with 2 columns. If you change the scrollDirection to
                               // horizontal, this produces 2 rows.
                               crossAxisCount: 2,
+                              mainAxisSpacing: 2,
+                              childAspectRatio: 10 / 14,
                               // Generate 100 widgets that display their index in the List.
                               children: List.generate(
                                   ((regularEvent.length) * .5).toInt(),
                                   (index) {
                                 int ind =
                                     (regularEvent.length * .5).toInt() + index;
-                                return EachEvent(list: regularEvent, ind: ind);
+                                return EachEvent(
+                                    list: regularEvent, ind: index);
                               }),
                             ),
 
@@ -260,59 +269,93 @@ class EachEvent extends StatelessWidget {
         );
       },
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 10, 0, 5),
-          child: Container(
-            height: height * .3,
-            width: width * .5,
-            decoration: new BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                image: new DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      list[ind].imageUrl,
-                    ),
-                    //  new NetworkImage(list[ind].imageUrl),
-                    fit: BoxFit.cover)),
-            child: new Center(
-              child: new ClipRect(
-                child: new SizedBox(
-                  height: height * .3,
-                  width: width * .5,
-                  child: new BackdropFilter(
-                    filter: new ImageFilter.blur(
-                      sigmaX: 2.0,
-                      sigmaY: 2.0,
-                    ),
-                    child: new Center(
-                      child: BorderedText(
-                        strokeWidth: 4.0,
-                        // strokeColor: Color(0xF2AA4CFF),
-                        strokeColor: Colors.black,
-                        child: Text(
-                          list[ind].eventName,
-                          style: TextStyle(
-                            shadows: [
-                              Shadow(
-                                blurRadius: 10.0,
-                                // color: Colors.red,
-                                offset: Offset(5.0, 10.0),
-                              ),
-                            ],
-                            color: Colors.yellow[700],
-                            // fontWeight: FontWeight.bold,
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.blueAccent,
+              ),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.,
+                children: [
+                  // Expanded(
+                  // child:
+                  Container(
+                    color: Colors.blue,
+                    // height: height * .1,
+                    // width: width * .7,
+                    // decoration: new BoxDecoration(
+                    //     // color: Colors.blue,
 
-                      //  new Text(
-                      // list[ind].eventName,
-                      // style: TextStyle(color: Colors.amber[600]),
-                      // ),
-                    ),
+                    //     borderRadius: BorderRadius.circular(5.0),
+                    //     image: new DecorationImage(
+                    //         image: CachedNetworkImageProvider(
+                    //           list[ind].imageUrl,
+                    //         ),
+                    //         //  new NetworkImage(list[ind].imageUrl),
+                    //         fit: BoxFit.fill)),
+
+                    child: Image(
+                        // height: 20,
+                        image: CachedNetworkImageProvider(
+                          list[ind].imageUrl,
+                        ),
+                        fit: BoxFit.cover),
+//
+                    //  new Center(
+                    //   child: new ClipRect(
+                    //     child: new SizedBox(
+                    //       height: height * .3,
+                    //       width: width * .5,
+                    //       child: new BackdropFilter(
+                    //         filter: new ImageFilter.blur(
+                    //             // sigmaX: 2.0,
+                    //             // sigmaY: 2.0,
+                    //             ),
+                    //         child: new Center(
+                    //           child: BorderedText(
+                    //             strokeWidth: 4.0,
+                    //             // strokeColor: Color(0xF2AA4CFF),
+                    //             strokeColor: Colors.black,
+                    //             child: Text(
+                    //               "",
+                    //               // list[ind].eventName,
+                    //               style: TextStyle(
+                    //                 shadows: [
+                    //                   Shadow(
+                    //                     blurRadius: 10.0,
+                    //                     // color: Colors.red,
+                    //                     offset: Offset(5.0, 10.0),
+                    //                   ),
+                    //                 ],
+                    //                 color: Colors.yellow[700],
+                    //                 // fontWeight: FontWeight.bold,
+                    //                 fontSize: 13.0,
+                    //                 fontWeight: FontWeight.bold,
+                    //               ),
+                    //             ),
+                    //           ),
+
+                    //  new Text(
+                    // list[ind].eventName,
+                    // style: TextStyle(color: Colors.amber[600]),
+                    // ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ),
-                ),
+                  // ),
+                  // SizedBox(
+                  // height: 10,
+                  // ),
+                  Container(
+                    child: Text(list[ind].eventName),
+                  )
+                ],
               ),
             ),
           ),
@@ -361,30 +404,54 @@ class CmReliefFund extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            elevation: 20,
-            shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0),
-            ),
-            // primary: Colors.yellow[700]),
-            primary: Colors.red),
-        onPressed: () async {
-          String upiurl =
-              'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';
-          await launch(upiurl);
-          // String upiurl = 'https://discord.gg/Kce6chxm';
-          // await launch(upiurl);
-        },
+    // return ElevatedButton(
+    //     style: ElevatedButton.styleFrom(
+    //         elevation: 20,
+    //         shape: new RoundedRectangleBorder(
+    //           borderRadius: new BorderRadius.circular(30.0),
+    //         ),
+    //         // primary: Colors.yellow[700]),
+    //         primary: Colors.red),
+    //     onPressed: () async {
+    //       String upiurl =
+    //           'upi://pay?pa=user@hdfgbank&pn=SenderName&tn=TestingGpay&am=100&cu=INR';
+    //       await launch(upiurl);
+    //       // String upiurl = 'https://discord.gg/Kce6chxm';
+    //       // await launch(upiurl);
+    //     },
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //       children: [
+    //         Text(
+    //           "Donate to CM Relief Fund",
+    //           style: TextStyle(color: Colors.white),
+    //         ),
+    //         // Image.asset('assets/disc.png', width: 45)
+    //       ],
+    //     ));
+
+    return GestureDetector(
+      onTap: () async {
+        String upiurl =
+            'upi://pay?pa=cyril199897@oksbi&pn=SenderName&tn=THanks&am=100&cu=INR';
+        await launch(upiurl);
+        // String upiurl = 'https://discord.gg/Kce6chxm';
+        // await launch(upiurl);
+      },
+      child: Container(
+        color: Colors.blueGrey,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Donate to CM Relief Fund",
-              style: TextStyle(color: Colors.white),
-            ),
-            // Image.asset('assets/disc.png', width: 45)
+            Container(
+              child: Text(
+                "Donate to CM Relief Fund",
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            )
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

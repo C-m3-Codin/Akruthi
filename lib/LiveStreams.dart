@@ -18,7 +18,7 @@ class _HorizontalImagesState extends State<HorizontalImages> {
     // widget.list.add(widget.list[0]);
     return Container(
       // height: 370.0,
-      height: height * .4,
+      height: height * .3,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: widget.list.length,
@@ -61,32 +61,40 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                         ],
                       ),
                       widget.list[index].happening == "Yes"
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Container(
-                                color: Colors.yellow,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      width: 40,
-                                    ),
-                                    Text(
-                                      "Live ",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                    ),
-                                    Icon(
-                                      Icons.live_tv,
-                                      color: Colors.red,
-                                    ),
-                                    SizedBox(
-                                      width: 40,
-                                    ),
-                                  ],
+                          ? Row(
+                              children: [
+                                SizedBox(
+                                  width: 10,
                                 ),
-                              ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  child: Container(
+                                    color: Colors.red,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          "Live ",
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.white),
+                                        ),
+                                        Icon(
+                                          Icons.live_tv,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             )
                           : Container(),
                     ])),
