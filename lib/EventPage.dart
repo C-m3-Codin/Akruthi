@@ -26,6 +26,12 @@ class _EventPageState extends State<EventPage> {
   var height;
   EventDetails eventDetails;
 
+  Color tileColor = Color.fromARGB(255, 255, 167, 0);
+  Color bgColor = Colors.black;
+  Color tileTextColor = Colors.black;
+  Color iconColor = Colors.black;
+  Color dialogTileColor = Color.fromARGB(255, 255, 167, 0);
+
   Future getSheetData() async {
     print("should come first");
     await http
@@ -50,7 +56,8 @@ class _EventPageState extends State<EventPage> {
       Padding(
         padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
         child: Text('RULES AND REGULATIONS',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+            style: TextStyle(
+                fontSize: 22, fontWeight: FontWeight.w600, color: tileColor)),
       )
     ];
     participantWidgets = [];
@@ -58,12 +65,17 @@ class _EventPageState extends State<EventPage> {
     for (var rule in eventDetails.rules) {
       ruleWidgets.add(
         Material(
+          color: bgColor,
           elevation: 2,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
             child: Card(
               child: ListTile(
-                title: Text(rule.desc),
+                tileColor: dialogTileColor,
+                title: Text(
+                  rule.desc,
+                  style: TextStyle(color: tileTextColor),
+                ),
               ),
             ),
           ),
@@ -74,13 +86,22 @@ class _EventPageState extends State<EventPage> {
     for (var participant in eventDetails.participants) {
       participantWidgets.add(
         Material(
+          color: bgColor,
           elevation: 2,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
             child: Card(
               child: ListTile(
-                title: Text(participant.name),
-                subtitle: Text(participant.particulars),
+                tileColor: dialogTileColor,
+                title: Text(
+                  participant.name,
+                  style: TextStyle(
+                      color: tileTextColor, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  participant.particulars,
+                  style: TextStyle(color: tileTextColor),
+                ),
               ),
             ),
           ),
@@ -94,6 +115,7 @@ class _EventPageState extends State<EventPage> {
         context: context,
         builder: (context) {
           return Dialog(
+              backgroundColor: bgColor,
               elevation: 5,
               insetPadding:
                   EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
@@ -118,45 +140,59 @@ class _EventPageState extends State<EventPage> {
                   EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
               child: SingleChildScrollView(
                 child: Container(
-                  // color: Theme.of(context).cardColor,
+                  color: bgColor,
                   child: Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
                         child: Text('RESULTS',
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w600)),
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                                color: tileColor)),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Card(
-                          color: Colors.black26,
+                          color: dialogTileColor,
                           child: ListTile(
                             leading: Icon(Icons.cake_sharp),
-                            title: Text(eventDetails.winnerFirst),
-                            subtitle: Text(eventDetails.firstParticulars),
+                            title: Text(eventDetails.winnerFirst,
+                                style: TextStyle(
+                                    color: bgColor,
+                                    fontWeight: FontWeight.bold)),
+                            subtitle: Text(eventDetails.firstParticulars,
+                                style: TextStyle(color: bgColor)),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Card(
-                          color: Colors.black26,
+                          color: dialogTileColor,
                           child: ListTile(
                             leading: Icon(Icons.cake_sharp),
-                            title: Text(eventDetails.winnerSecond),
-                            subtitle: Text(eventDetails.secondParticulars),
+                            title: Text(eventDetails.winnerSecond,
+                                style: TextStyle(
+                                    color: bgColor,
+                                    fontWeight: FontWeight.bold)),
+                            subtitle: Text(eventDetails.secondParticulars,
+                                style: TextStyle(color: bgColor)),
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: Card(
-                          color: Colors.black26,
+                          color: dialogTileColor,
                           child: ListTile(
                             leading: Icon(Icons.cake_sharp),
-                            title: Text(eventDetails.winnerThird),
-                            subtitle: Text(eventDetails.thirdParticulars),
+                            title: Text(eventDetails.winnerThird,
+                                style: TextStyle(
+                                    color: bgColor,
+                                    fontWeight: FontWeight.bold)),
+                            subtitle: Text(eventDetails.thirdParticulars,
+                                style: TextStyle(color: bgColor)),
                           ),
                         ),
                       )
@@ -172,7 +208,7 @@ class _EventPageState extends State<EventPage> {
         context: context,
         builder: (context) {
           return Dialog(
-              backgroundColor: Colors.yellow,
+              backgroundColor: bgColor,
               elevation: 5,
               insetPadding:
                   EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
@@ -182,7 +218,9 @@ class _EventPageState extends State<EventPage> {
                     padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
                     child: Text('PARTICIPANTS',
                         style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w600)),
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: tileColor)),
                   ),
                   Flexible(
                     flex: 1,
@@ -214,20 +252,20 @@ class _EventPageState extends State<EventPage> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
-      Image.asset(
-        "assets/white2.jpg",
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-      ),
+      // Image.asset(
+      //   "assets/white2.jpg",
+      //   height: MediaQuery.of(context).size.height,
+      //   width: MediaQuery.of(context).size.width,
+      //   fit: BoxFit.cover,
+      // ),
       Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: bgColor,
           // backgroundColor: ,Scaffold(
           body: !loadingComplete
               ? Container(
                   child: Center(
                     child: CircularProgressIndicator(
-                      backgroundColor: Colors.green,
+                      backgroundColor: tileColor,
                     ),
                   ),
                 )
@@ -263,7 +301,7 @@ class _EventPageState extends State<EventPage> {
                             style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                                color: tileColor),
                           ),
                         ),
                         Padding(
@@ -273,7 +311,7 @@ class _EventPageState extends State<EventPage> {
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.black),
+                                color: Colors.white),
                           ),
                         ),
                         // Text(
@@ -288,16 +326,16 @@ class _EventPageState extends State<EventPage> {
                             child: ListTile(
                               leading: Icon(
                                 Icons.multiple_stop,
-                                color: Colors.yellow[50],
+                                color: iconColor,
                               ),
                               title: Text(
                                 'RESULTS',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.yellow),
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                               ),
-                              tileColor: Colors.black87,
+                              tileColor: tileColor,
                             ),
                           ),
                         ),
@@ -313,17 +351,17 @@ class _EventPageState extends State<EventPage> {
                             child: ListTile(
                               leading: Icon(
                                 Icons.rule,
-                                color: Colors.yellow[50],
+                                color: iconColor,
                               ),
                               title: Text(
                                 'RULES AND REGULATIONS',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.yellow),
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                               ),
                               // tileColor: Theme.of(context).backgroundColor,
-                              tileColor: Colors.black87,
+                              tileColor: tileColor,
                             ),
                           ),
                         ),
@@ -334,16 +372,16 @@ class _EventPageState extends State<EventPage> {
                             child: ListTile(
                               leading: Icon(
                                 Icons.multiple_stop,
-                                color: Colors.yellow[50],
+                                color: iconColor,
                               ),
                               title: Text(
                                 'PARTICIPANTS',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.yellow),
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                               ),
-                              tileColor: Colors.black87,
+                              tileColor: tileColor,
                             ),
                           ),
                         ),
@@ -354,35 +392,34 @@ class _EventPageState extends State<EventPage> {
                             child: ListTile(
                               leading: Icon(
                                 Icons.person,
-                                color: Colors.yellow[50],
+                                color: iconColor,
                               ),
                               title: Text(
                                 eventDetails.coordinator1,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.yellow),
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                      icon: Icon(Icons.call,
-                                          color: Colors.blue[200]),
+                                      icon: Icon(Icons.call, color: iconColor),
                                       onPressed: () {
                                         _launchURL(
                                             'tel:+91' + eventDetails.c1Number);
                                       }),
                                   IconButton(
-                                      icon: Icon(Icons.message,
-                                          color: Colors.green),
+                                      icon:
+                                          Icon(Icons.message, color: iconColor),
                                       onPressed: () {
                                         _launchURL('https://wa.me/+91' +
                                             eventDetails.c1Number);
                                       }),
                                 ],
                               ),
-                              tileColor: Colors.black87,
+                              tileColor: tileColor,
                             ),
                           ),
                         ),
@@ -393,35 +430,34 @@ class _EventPageState extends State<EventPage> {
                             child: ListTile(
                               leading: Icon(
                                 Icons.person,
-                                color: Colors.yellow[50],
+                                color: iconColor,
                               ),
                               title: Text(
                                 eventDetails.coordinator2,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.yellow),
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                      icon: Icon(Icons.call,
-                                          color: Colors.blue[200]),
+                                      icon: Icon(Icons.call, color: iconColor),
                                       onPressed: () {
                                         _launchURL(
                                             'tel:+91' + eventDetails.c2Number);
                                       }),
                                   IconButton(
-                                      icon: Icon(Icons.message,
-                                          color: Colors.green),
+                                      icon:
+                                          Icon(Icons.message, color: iconColor),
                                       onPressed: () {
                                         _launchURL('https://wa.me/+91' +
                                             eventDetails.c2Number);
                                       }),
                                 ],
                               ),
-                              tileColor: Colors.black87,
+                              tileColor: tileColor,
                             ),
                           ),
                         ),
