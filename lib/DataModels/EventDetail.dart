@@ -4,23 +4,30 @@
 
 import 'dart:convert';
 
-// EventDetails eventDetailsFromJson(String str) => EventDetails.fromJson(json.decode(str));
-//
-// String eventDetailsToJson(EventDetails data) => json.encode(data.toJson());
+EventDetails eventDetailsFromJson(String str) =>
+    EventDetails.fromJson(json.decode(str));
+
+String eventDetailsToJson(EventDetails data) => json.encode(data.toJson());
 
 class EventDetails {
   EventDetails({
     this.name,
     this.date,
     this.category,
-    this.pointStructure,
-    this.resultAnnounced,
-    this.firstWinner,
-    this.firstParticular,
-    this.secondWinner,
-    this.secondParticular,
-    this.thirdWinner,
-    this.thirdParticular,
+    this.status,
+    this.description,
+    this.resultsAnnounced,
+    this.winnerFirst,
+    this.firstParticulars,
+    this.winnerSecond,
+    this.secondParticulars,
+    this.winnerThird,
+    this.thirdParticulars,
+    this.posterUrl,
+    this.coordinator1,
+    this.c1Number,
+    this.coordinator2,
+    this.c2Number,
     this.participants,
     this.rules,
   });
@@ -28,14 +35,20 @@ class EventDetails {
   String name;
   String date;
   String category;
-  String pointStructure;
-  String resultAnnounced;
-  String firstWinner;
-  String firstParticular;
-  String secondWinner;
-  String secondParticular;
-  String thirdWinner;
-  String thirdParticular;
+  String status;
+  String description;
+  String resultsAnnounced;
+  String winnerFirst;
+  String firstParticulars;
+  String winnerSecond;
+  String secondParticulars;
+  String winnerThird;
+  String thirdParticulars;
+  String posterUrl;
+  String coordinator1;
+  String c1Number;
+  String coordinator2;
+  String c2Number;
   List<Participant> participants;
   List<Rule> rules;
 
@@ -43,14 +56,20 @@ class EventDetails {
         name: json["name"],
         date: json["date"],
         category: json["category"],
-        pointStructure: json["pointStructure"],
-        resultAnnounced: json["resultAnnounced"],
-        firstWinner: json["FirstWinner"],
-        firstParticular: json["FirstParticular"],
-        secondWinner: json["SecondWinner"],
-        secondParticular: json["SecondParticular"],
-        thirdWinner: json["ThirdWinner"],
-        thirdParticular: json["ThirdParticular"],
+        status: json["status"],
+        description: json["description"],
+        resultsAnnounced: json["resultsAnnounced"],
+        winnerFirst: json["winnerFirst"],
+        firstParticulars: json["firstParticulars"],
+        winnerSecond: json["winnerSecond"],
+        secondParticulars: json["secondParticulars"],
+        winnerThird: json["winnerThird"],
+        thirdParticulars: json["thirdParticulars"],
+        posterUrl: json["posterUrl"],
+        coordinator1: json["coordinator1"],
+        c1Number: json["c1number"],
+        coordinator2: json["coordinator2"],
+        c2Number: json["c2number"],
         participants: List<Participant>.from(
             json["participants"].map((x) => Participant.fromJson(x))),
         rules: List<Rule>.from(json["rules"].map((x) => Rule.fromJson(x))),
@@ -60,14 +79,20 @@ class EventDetails {
         "name": name,
         "date": date,
         "category": category,
-        "pointStructure": pointStructure,
-        "resultAnnounced": resultAnnounced,
-        "FirstWinner": firstWinner,
-        "FirstParticular": firstParticular,
-        "SecondWinner": secondWinner,
-        "SecondParticular": secondParticular,
-        "ThirdWinner": thirdWinner,
-        "ThirdParticular": thirdParticular,
+        "status": status,
+        "description": description,
+        "resultsAnnounced": resultsAnnounced,
+        "winnerFirst": winnerFirst,
+        "firstParticulars": firstParticulars,
+        "winnerSecond": winnerSecond,
+        "secondParticulars": secondParticulars,
+        "winnerThird": winnerThird,
+        "thirdParticulars": thirdParticulars,
+        "posterUrl": posterUrl,
+        "coordinator1": coordinator1,
+        "c1number": c1Number,
+        "coordinator2": coordinator2,
+        "c2number": c2Number,
         "participants": List<dynamic>.from(participants.map((x) => x.toJson())),
         "rules": List<dynamic>.from(rules.map((x) => x.toJson())),
       };
