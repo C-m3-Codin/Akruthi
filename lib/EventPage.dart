@@ -2,6 +2,7 @@ import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/Services/Database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -222,6 +223,23 @@ class _EventPageState extends State<EventPage> {
                       ),
                     ),
                   ),
+
+                  // ExpandablePanel(
+                  //   header: Text('RULES AND REGULATIONS'),
+                  //   collapsed: Text(
+                  //     "TEsting",
+                  //     softWrap: true,
+                  //     maxLines: 2,
+                  //     overflow: TextOverflow.ellipsis,
+                  //   ),
+                  //   expanded: Text(
+                  //     article.body,
+                  //     softWrap: true,
+                  //   ),
+                  //   tapHeaderToExpand: true,
+                  //   hasIcon: true,
+                  // ),
+
                   TextButton(
                     onPressed: participantsDialog,
                     child: ClipRRect(
