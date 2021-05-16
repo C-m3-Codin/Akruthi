@@ -32,9 +32,11 @@ class _EventPageState extends State<EventPage> {
   Color tileTextColor = Colors.black;
   Color iconColor = Colors.black;
   Color dialogTileColor = Color.fromARGB(255, 255, 167, 0);
+  double textScaleFactor = 0.83;
 
   Future getSheetData() async {
     print("should come first");
+
     await http.get(Uri.parse(
         // "https://script.google.com/macros/s/AKfycbyWh0-nnI1Q5M2LHXjPYxe6SEzPma1KMyu9duTWWXKe_4P3G4cKmL0e0BFWTnrFFASacg/exec")
 
@@ -85,6 +87,7 @@ class _EventPageState extends State<EventPage> {
     }
 
     for (var participant in eventDetails.participants) {
+      // print(participant.name);
       participantWidgets.add(
         Material(
           color: bgColor,
@@ -275,11 +278,7 @@ class _EventPageState extends State<EventPage> {
                 )
               : SafeArea(
                   child: RefreshIndicator(
-                    onRefresh: () {
-                      return Future.delayed(Duration(seconds: 2), () {
-                        print('Pull to refresh triggered');
-                      });
-                    },
+                    onRefresh: getSheetData,
                     child: ListView(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       children: [
@@ -292,7 +291,7 @@ class _EventPageState extends State<EventPage> {
                                 borderRadius: BorderRadius.circular(20.0),
                                 image: new DecorationImage(
                                     image: CachedNetworkImageProvider(
-                                      eventDetails.posterUrl,
+                                      widget.event.imageUrl,
                                     ),
                                     // new NetworkImage(widget.event.imageUrl),
                                     fit: BoxFit.cover)),
@@ -302,6 +301,7 @@ class _EventPageState extends State<EventPage> {
                           padding: EdgeInsets.all(5),
                           child: Text(
                             eventDetails.name,
+                            textScaleFactor: textScaleFactor,
                             style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
@@ -312,6 +312,7 @@ class _EventPageState extends State<EventPage> {
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: Text(
                             eventDetails.description,
+                            textScaleFactor: textScaleFactor,
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
@@ -324,16 +325,22 @@ class _EventPageState extends State<EventPage> {
                         //   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                         // ),
                         TextButton(
-                          onPressed: resultDialog,
+                          onPressed: eventDetails.resultsAnnounced == 'yes'
+                              ? resultDialog
+                              : () {},
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: ListTile(
+                              trailing: eventDetails.resultsAnnounced == 'no'
+                                  ? Icon(Icons.close)
+                                  : Icon(Icons.check),
                               leading: Icon(
                                 Icons.multiple_stop,
                                 color: iconColor,
                               ),
                               title: Text(
                                 'RESULTS',
+                                textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -359,7 +366,7 @@ class _EventPageState extends State<EventPage> {
                               ),
                               title: Text(
                                 'RULES AND REGULATIONS',
-                                textScaleFactor: .8,
+                                textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -381,6 +388,7 @@ class _EventPageState extends State<EventPage> {
                               ),
                               title: Text(
                                 'PARTICIPANTS',
+                                textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -400,10 +408,8 @@ class _EventPageState extends State<EventPage> {
                                 color: iconColor,
                               ),
                               title: Text(
-                                eventDetails.coordinator1,
-                                // "Coordinator",
-
-                                textScaleFactor: .8,
+                                eventDetails.coordinator1.toUpperCase(),
+                                textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     // textScaleFactor: 1.0,
                                     fontSize: 20,
@@ -443,7 +449,8 @@ class _EventPageState extends State<EventPage> {
                                 color: iconColor,
                               ),
                               title: Text(
-                                eventDetails.coordinator2,
+                                eventDetails.coordinator2.toUpperCase(),
+                                textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,

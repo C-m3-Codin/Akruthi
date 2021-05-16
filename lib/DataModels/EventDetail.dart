@@ -2,6 +2,7 @@
 //
 //     final eventDetails = eventDetailsFromJson(jsonString);
 
+//what about now
 import 'dart:convert';
 
 EventDetails eventDetailsFromJson(String str) =>

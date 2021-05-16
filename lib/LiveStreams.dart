@@ -78,15 +78,16 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                                           width: 10,
                                         ),
                                         Text(
-                                          "Live ",
+                                          "LIVE ",
                                           style: TextStyle(
-                                              fontSize: 10,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.white),
                                         ),
-                                        Icon(
-                                          Icons.live_tv,
-                                          color: Colors.white,
-                                        ),
+                                        // Icon(
+                                        //   Icons.live_tv,
+                                        //   color: Colors.white,
+                                        // ),
                                         SizedBox(
                                           width: 10,
                                         ),
