@@ -49,7 +49,7 @@ class _ScoreCardState extends State<ScoreCard> {
       ),
       Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("Score Board")),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         body: RefreshIndicator(
           onRefresh: getSheetData,
           child: scores.isEmpty
@@ -70,10 +70,11 @@ class _ScoreCardState extends State<ScoreCard> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 6),
                       child: Card(
+                        color: Colors.black,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: ListTile(
-                            tileColor: Colors.yellow[900],
+                            tileColor: Color.fromARGB(255, 255, 167, 0),
                             leading: scores[index].points == scores[0].points
                                 ? Icon(
                                     Icons.stars,
@@ -83,14 +84,15 @@ class _ScoreCardState extends State<ScoreCard> {
                                     ? Icon(Icons.star_outline)
                                     : SizedBox(),
                             title: BorderedText(
-                              strokeWidth: 4.0,
+                              strokeWidth: 1.0,
                               strokeColor: Colors.black,
                               child: Text(
                                 scores[index].scoreClass,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
+                                    color: Colors.black,
                                     decoration: TextDecoration.none,
-                                    decorationColor: Colors.red,
+                                    // decorationColor: Colors.red,
                                     letterSpacing: 2.0),
                               ),
                             ),
