@@ -80,7 +80,9 @@ class _MyAppState extends State<MyApp> {
 
     return list.isEmpty
         ? Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              backgroundColor: Color.fromARGB(255, 255, 167, 0),
+            ),
           )
         : SafeArea(
             child: Stack(children: <Widget>[

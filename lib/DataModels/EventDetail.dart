@@ -67,9 +67,9 @@ class EventDetails {
         thirdParticulars: json["thirdParticulars"],
         posterUrl: json["posterUrl"],
         coordinator1: json["coordinator1"],
-        c1Number: json["c1number"],
+        c1Number: json["c1number"].toString(),
         coordinator2: json["coordinator2"],
-        c2Number: json["c2number"],
+        c2Number: json["c2number"].toString(),
         participants: List<Participant>.from(
             json["participants"].map((x) => Participant.fromJson(x))),
         rules: List<Rule>.from(json["rules"].map((x) => Rule.fromJson(x))),
