@@ -55,7 +55,7 @@ class MApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: MyApp(),
       darkTheme: ThemeData.dark(),
     );
   }

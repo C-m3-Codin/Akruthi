@@ -43,12 +43,14 @@ dependencies:
   bordered_text: ^1.0.1
   expandable: ^5.0.1
   google_fonts: ^2.1.0
-  flutter_screenutil: ^0.3.0
   auto_size_text: ^2.1.0
+  flutter_screenutil: ^0.3.0
+  # flutter pub add auto_size_text
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^1.1.8+4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
