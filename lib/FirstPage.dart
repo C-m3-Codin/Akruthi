@@ -246,20 +246,10 @@ class EachEvent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
-<<<<<<< HEAD
-                          child: Text(
-                            list[ind].eventName.toUpperCase(),
-                            textScaleFactor: textScaleFactor,
-                            style: GoogleFonts.montserrat(
-                                color: Colors.black,
-                                fontSize: 14.0,
-                                letterSpacing: 1.1
-=======
                           child: AutoSizeText(
-                            list[ind].eventName,
+                            list[ind].eventName.toUpperCase(),
                             style: GoogleFonts.montserrat(
                                 color: Colors.black, fontSize: 15.0
->>>>>>> 79a3aa4f004c32486004b60e68293ddbcf3fa4d8
                                 // fontSize: 15,
                                 ),
                           ),

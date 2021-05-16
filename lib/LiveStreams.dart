@@ -68,7 +68,7 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                                   width: 10,
                                 ),
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                   child: Container(
                                     color: Colors.red,
                                     child: Padding(
