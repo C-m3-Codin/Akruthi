@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventPage extends StatefulWidget {
@@ -58,7 +59,7 @@ class _EventPageState extends State<EventPage> {
     ruleWidgets = [
       Padding(
         padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
-        child: Text('RULES AND REGULATIONS',
+        child: AutoSizeText('RULES AND REGULATIONS',
             style: TextStyle(
                 fontSize: 22, fontWeight: FontWeight.w600, color: tileColor)),
       )
@@ -364,14 +365,23 @@ class _EventPageState extends State<EventPage> {
                                 Icons.rule,
                                 color: iconColor,
                               ),
-                              title: Text(
-                                'RULES AND REGULATIONS',
-                                textScaleFactor: textScaleFactor,
+                              title: AutoSizeText(
+                                'RULES AND REGULATIONS ',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: tileTextColor),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
                               ),
+
+                              // Text(
+                              //   'RULES AND REGULATIONS',
+                              //   textScaleFactor: textScaleFactor,
+                              //   style: TextStyle(
+                              //       fontSize: 20,
+                              //       fontWeight: FontWeight.bold,
+                              //       color: tileTextColor),
+                              // ),
                               // tileColor: Theme.of(context).backgroundColor,
                               tileColor: tileColor,
                             ),
@@ -407,7 +417,17 @@ class _EventPageState extends State<EventPage> {
                                 Icons.person,
                                 color: iconColor,
                               ),
-                              title: Text(
+                              title:
+                                  //  AutoSizeText(
+                                  //   'RULES AND REGULATIONS ',
+                                  //   style: TextStyle(
+                                  //     fontSize: 20,
+                                  //     fontWeight: FontWeight.bold,
+                                  //   ),
+                                  //   maxLines: 2,
+                                  // ),
+
+                                  AutoSizeText(
                                 eventDetails.coordinator1.toUpperCase(),
                                 textScaleFactor: textScaleFactor,
                                 style: TextStyle(
@@ -448,9 +468,10 @@ class _EventPageState extends State<EventPage> {
                                 Icons.person,
                                 color: iconColor,
                               ),
-                              title: Text(
+                              title: AutoSizeText(
                                 eventDetails.coordinator2.toUpperCase(),
-                                textScaleFactor: textScaleFactor,
+                                // textScaleFactor: textScaleFactor,
+                                // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,

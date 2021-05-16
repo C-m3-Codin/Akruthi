@@ -44,6 +44,7 @@ dependencies:
   expandable: ^5.0.1
   google_fonts: ^2.1.0
   flutter_screenutil: ^0.3.0
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:
