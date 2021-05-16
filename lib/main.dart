@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:akruthi/FirstPage.dart';
+import 'package:akruthi/splashScreen.dart';
 
 // import 'package:carousel_slider/carousel_slider.dart';
 
@@ -54,7 +55,7 @@ class MApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyApp(),
+      home: SplashScreen(),
       darkTheme: ThemeData.dark(),
     );
   }
