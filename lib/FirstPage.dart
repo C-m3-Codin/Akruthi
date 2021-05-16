@@ -1,5 +1,6 @@
 import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
+import 'package:akruthi/Donate.dart';
 import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/main.dart';
 import 'package:akruthi/DataModels/StreamEvents.dart';
@@ -166,7 +167,8 @@ class _MyAppState extends State<MyApp> {
         child: Center(
           child: Text(
             "Events ${regularEvent.length}",
-            style: GoogleFonts.abrilFatface(fontSize: 20, color: Colors.white),
+            style: GoogleFonts.abrilFatface(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -297,39 +299,6 @@ class DiscordJoin extends StatelessWidget {
               Image.asset('assets/disc.png', width: 45)
             ],
           )),
-    );
-  }
-}
-
-class CmReliefFund extends StatelessWidget {
-  const CmReliefFund({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        String upiurl =
-            'upi://pay?pa=cyril199897@oksbi&pn=SenderName&tn=THanks&am=100&cu=INR';
-        await launch(upiurl);
-        // String upiurl = 'https://discord.gg/Kce6chxm';
-        // await launch(upiurl);
-      },
-      child: Container(
-        color: Colors.blueGrey,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: Text(
-                "Donate for a good cause",
-                style: TextStyle(color: Colors.white, fontSize: 10),
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 }
