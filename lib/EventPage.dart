@@ -428,8 +428,11 @@ class _EventPageState extends State<EventPage> {
                                   // ),
 
                                   AutoSizeText(
+                                // "MOHAMMED",
                                 eventDetails.coordinator1.toUpperCase(),
-                                textScaleFactor: textScaleFactor,
+                                maxLines: 1,
+                                // max
+                                // textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     // textScaleFactor: 1.0,
                                     fontSize: 20,
@@ -470,6 +473,7 @@ class _EventPageState extends State<EventPage> {
                               ),
                               title: AutoSizeText(
                                 eventDetails.coordinator2.toUpperCase(),
+                                maxLines: 1,
                                 // textScaleFactor: textScaleFactor,
                                 // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
                                 style: TextStyle(
