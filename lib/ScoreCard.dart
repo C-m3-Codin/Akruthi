@@ -41,12 +41,12 @@ class _ScoreCardState extends State<ScoreCard> {
   Widget build(BuildContext context) {
     List difference = [];
     return Stack(children: <Widget>[
-      Image.asset(
-        "assets/white2.jpg",
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        fit: BoxFit.cover,
-      ),
+      // Image.asset(
+      //   "assets/white2.jpg",
+      //   height: MediaQuery.of(context).size.height,
+      //   width: MediaQuery.of(context).size.width,
+      //   fit: BoxFit.cover,
+      // ),
       Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("Score Board")),
         backgroundColor: Colors.black,
