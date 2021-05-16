@@ -14,6 +14,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -83,7 +84,9 @@ class _MyAppState extends State<MyApp> {
 
     return list.isEmpty
         ? Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              backgroundColor: Color.fromARGB(255, 255, 167, 0),
+            ),
           )
         : SafeArea(
             child: Stack(children: <Widget>[
@@ -243,6 +246,7 @@ class EachEvent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
+<<<<<<< HEAD
                           child: Text(
                             list[ind].eventName.toUpperCase(),
                             textScaleFactor: textScaleFactor,
@@ -250,6 +254,12 @@ class EachEvent extends StatelessWidget {
                                 color: Colors.black,
                                 fontSize: 14.0,
                                 letterSpacing: 1.1
+=======
+                          child: AutoSizeText(
+                            list[ind].eventName,
+                            style: GoogleFonts.montserrat(
+                                color: Colors.black, fontSize: 15.0
+>>>>>>> 79a3aa4f004c32486004b60e68293ddbcf3fa4d8
                                 // fontSize: 15,
                                 ),
                           ),

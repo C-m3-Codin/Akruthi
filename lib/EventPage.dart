@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventPage extends StatefulWidget {
   EventPage({this.event, this.eventDeets});
@@ -35,7 +37,11 @@ class _EventPageState extends State<EventPage> {
 
   Future getSheetData() async {
     print("should come first");
-    await http.get(Uri.parse(widget.event.sheet)).then((raw) {
+
+    await http.get(Uri.parse(
+        // "https://script.google.com/macros/s/AKfycbyWh0-nnI1Q5M2LHXjPYxe6SEzPma1KMyu9duTWWXKe_4P3G4cKmL0e0BFWTnrFFASacg/exec")
+
+        widget.event.sheet)).then((raw) {
       var jsonEvent = convert.jsonDecode(raw.body);
       eventDetails = EventDetails.fromJson(jsonEvent);
       print(eventDetails.name);
@@ -53,7 +59,7 @@ class _EventPageState extends State<EventPage> {
     ruleWidgets = [
       Padding(
         padding: EdgeInsets.fromLTRB(10, 22, 10, 18),
-        child: Text('RULES AND REGULATIONS',
+        child: AutoSizeText('RULES AND REGULATIONS',
             style: TextStyle(
                 fontSize: 22, fontWeight: FontWeight.w600, color: tileColor)),
       )
@@ -248,6 +254,9 @@ class _EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
@@ -356,14 +365,23 @@ class _EventPageState extends State<EventPage> {
                                 Icons.rule,
                                 color: iconColor,
                               ),
-                              title: Text(
-                                'RULES AND REGULATIONS',
-                                textScaleFactor: textScaleFactor,
+                              title: AutoSizeText(
+                                'RULES AND REGULATIONS ',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: tileTextColor),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
                               ),
+
+                              // Text(
+                              //   'RULES AND REGULATIONS',
+                              //   textScaleFactor: textScaleFactor,
+                              //   style: TextStyle(
+                              //       fontSize: 20,
+                              //       fontWeight: FontWeight.bold,
+                              //       color: tileTextColor),
+                              // ),
                               // tileColor: Theme.of(context).backgroundColor,
                               tileColor: tileColor,
                             ),
@@ -399,11 +417,26 @@ class _EventPageState extends State<EventPage> {
                                 Icons.person,
                                 color: iconColor,
                               ),
-                              title: Text(
+                              title:
+                                  //  AutoSizeText(
+                                  //   'RULES AND REGULATIONS ',
+                                  //   style: TextStyle(
+                                  //     fontSize: 20,
+                                  //     fontWeight: FontWeight.bold,
+                                  //   ),
+                                  //   maxLines: 2,
+                                  // ),
+
+                                  AutoSizeText(
+                                // "MOHAMMED",
                                 eventDetails.coordinator1.toUpperCase(),
-                                textScaleFactor: textScaleFactor,
+                                maxLines: 1,
+                                // max
+                                // textScaleFactor: textScaleFactor,
                                 style: TextStyle(
+                                    // textScaleFactor: 1.0,
                                     fontSize: 20,
+                                    // fontSize: ScreenUtil().setSp(28, false),
                                     fontWeight: FontWeight.bold,
                                     color: tileTextColor),
                               ),
@@ -438,9 +471,11 @@ class _EventPageState extends State<EventPage> {
                                 Icons.person,
                                 color: iconColor,
                               ),
-                              title: Text(
+                              title: AutoSizeText(
                                 eventDetails.coordinator2.toUpperCase(),
-                                textScaleFactor: textScaleFactor,
+                                maxLines: 1,
+                                // textScaleFactor: textScaleFactor,
+                                // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
