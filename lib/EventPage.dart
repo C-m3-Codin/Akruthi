@@ -36,7 +36,7 @@ class _EventPageState extends State<EventPage> {
     print("should come first");
     await http
         .get(Uri.parse(
-            "https://script.google.com/macros/s/AKfycbyWh0-nnI1Q5M2LHXjPYxe6SEzPma1KMyu9duTWWXKe_4P3G4cKmL0e0BFWTnrFFASacg/exec"))
+            "https://script.google.com/macros/s/AKfycbzeu59JId-uGQNsFtrjVMzICM9-qGla8-L1xC5D8Z0bdcPpSvEedGjtrY8IPst855Twpw/exec"))
         .then((raw) {
       var jsonEvent = convert.jsonDecode(raw.body);
       eventDetails = EventDetails.fromJson(jsonEvent);
@@ -84,6 +84,7 @@ class _EventPageState extends State<EventPage> {
     }
 
     for (var participant in eventDetails.participants) {
+      print(participant.name);
       participantWidgets.add(
         Material(
           color: bgColor,
