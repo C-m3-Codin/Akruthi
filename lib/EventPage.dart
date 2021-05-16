@@ -255,8 +255,8 @@ class _EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+    // ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+    // ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
 
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
