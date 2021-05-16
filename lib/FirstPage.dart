@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 body: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(1),
                     child: new SingleChildScrollView(
                         physics: ScrollPhysics(),
                         child: Column(

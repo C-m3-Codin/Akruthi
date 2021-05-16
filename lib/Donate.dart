@@ -29,7 +29,13 @@ class CmReliefFund extends StatelessWidget {
             Container(
               child: Text(
                 "Donate for a good cause",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                //
+
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             )
           ],
