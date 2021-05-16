@@ -14,6 +14,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -240,10 +241,10 @@ class EachEvent extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
-                          child: Text(
+                          child: AutoSizeText(
                             list[ind].eventName,
                             style: GoogleFonts.montserrat(
-                                color: Colors.black, fontSize: 10.0
+                                color: Colors.black, fontSize: 15.0
                                 // fontSize: 15,
                                 ),
                           ),
