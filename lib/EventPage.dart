@@ -34,6 +34,7 @@ class _EventPageState extends State<EventPage> {
   Color iconColor = Colors.black;
   Color dialogTileColor = Color.fromARGB(255, 255, 167, 0);
   double textScaleFactor = 0.83;
+  double fontSize = 18;
 
   Future getSheetData() async {
     print("should come first");
@@ -161,7 +162,7 @@ class _EventPageState extends State<EventPage> {
                         child: Card(
                           color: dialogTileColor,
                           child: ListTile(
-                            leading: Icon(Icons.cake_sharp),
+                            leading: Icon(Icons.star, size: 32),
                             title: Text(eventDetails.winnerFirst,
                                 style: TextStyle(
                                     color: bgColor,
@@ -176,7 +177,7 @@ class _EventPageState extends State<EventPage> {
                         child: Card(
                           color: dialogTileColor,
                           child: ListTile(
-                            leading: Icon(Icons.cake_sharp),
+                            leading: Icon(Icons.star, size: 32),
                             title: Text(eventDetails.winnerSecond,
                                 style: TextStyle(
                                     color: bgColor,
@@ -191,7 +192,7 @@ class _EventPageState extends State<EventPage> {
                         child: Card(
                           color: dialogTileColor,
                           child: ListTile(
-                            leading: Icon(Icons.cake_sharp),
+                            leading: Icon(Icons.star, size: 32),
                             title: Text(eventDetails.winnerThird,
                                 style: TextStyle(
                                     color: bgColor,
@@ -260,15 +261,8 @@ class _EventPageState extends State<EventPage> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
-      // Image.asset(
-      //   "assets/white2.jpg",
-      //   height: MediaQuery.of(context).size.height,
-      //   width: MediaQuery.of(context).size.width,
-      //   fit: BoxFit.cover,
-      // ),
       Scaffold(
           backgroundColor: bgColor,
-          // backgroundColor: ,Scaffold(
           body: !loadingComplete
               ? Container(
                   child: Center(
@@ -286,7 +280,7 @@ class _EventPageState extends State<EventPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Container(
-                            height: height * .6,
+                            height: height * .65,
                             width: width,
                             decoration: new BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -299,7 +293,7 @@ class _EventPageState extends State<EventPage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.symmetric(vertical: 5),
                           child: Text(
                             eventDetails.name,
                             textScaleFactor: textScaleFactor,
@@ -307,6 +301,30 @@ class _EventPageState extends State<EventPage> {
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
                                 color: tileColor),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Icon(
+                                  Icons.date_range,
+                                  size: 18,
+                                ),
+                              ),
+                              Text(
+                                eventDetails.date,
+                                textScaleFactor: textScaleFactor,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.white),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
@@ -333,17 +351,17 @@ class _EventPageState extends State<EventPage> {
                             borderRadius: BorderRadius.circular(12),
                             child: ListTile(
                               trailing: eventDetails.resultsAnnounced == 'no'
-                                  ? Icon(Icons.close)
-                                  : Icon(Icons.check),
+                                  ? Icon(Icons.close, color: Colors.black)
+                                  : Icon(Icons.check, color: Colors.black),
                               leading: Icon(
                                 Icons.multiple_stop,
                                 color: iconColor,
                               ),
                               title: Text(
                                 'RESULTS',
-                                textScaleFactor: textScaleFactor,
+                                // textScaleFactor: textScaleFactor,
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: fontSize,
                                     fontWeight: FontWeight.bold,
                                     color: tileTextColor),
                               ),
@@ -368,9 +386,9 @@ class _EventPageState extends State<EventPage> {
                               title: AutoSizeText(
                                 'RULES AND REGULATIONS ',
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.bold,
+                                    color: tileTextColor),
                                 maxLines: 1,
                               ),
 
@@ -398,9 +416,9 @@ class _EventPageState extends State<EventPage> {
                               ),
                               title: Text(
                                 'PARTICIPANTS',
-                                textScaleFactor: textScaleFactor,
+                                // textScaleFactor: textScaleFactor,
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: fontSize,
                                     fontWeight: FontWeight.bold,
                                     color: tileTextColor),
                               ),
@@ -435,7 +453,7 @@ class _EventPageState extends State<EventPage> {
                                 // textScaleFactor: textScaleFactor,
                                 style: TextStyle(
                                     // textScaleFactor: 1.0,
-                                    fontSize: 20,
+                                    fontSize: fontSize,
                                     // fontSize: ScreenUtil().setSp(28, false),
                                     fontWeight: FontWeight.bold,
                                     color: tileTextColor),
@@ -477,7 +495,7 @@ class _EventPageState extends State<EventPage> {
                                 // textScaleFactor: textScaleFactor,
                                 // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
                                 style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: fontSize,
                                     fontWeight: FontWeight.bold,
                                     color: tileTextColor),
                               ),

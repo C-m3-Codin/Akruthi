@@ -26,6 +26,9 @@ class _MyAppState extends State<MyApp> {
   List<StreamingEvents> list = [];
   List<RegEvent> regularEvent = [];
   QuerySnapshot querySnapshot;
+
+  double textScaleFactor = 0.9;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -190,6 +193,7 @@ class EachEvent extends StatelessWidget {
 
   final List<RegEvent> list;
   final int ind;
+  final double textScaleFactor = 0.95;
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +248,7 @@ class EachEvent extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
                           child: AutoSizeText(
-                            list[ind].eventName,
+                            list[ind].eventName.toUpperCase(),
                             style: GoogleFonts.montserrat(
                                 color: Colors.black, fontSize: 15.0
                                 // fontSize: 15,
@@ -268,7 +272,7 @@ class DiscordJoin extends StatelessWidget {
   const DiscordJoin({
     Key key,
   }) : super(key: key);
-
+  final double textScaleFactor = 1;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -289,11 +293,11 @@ class DiscordJoin extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                " Join Discord ",
+                " Join Discord ", textScaleFactor: textScaleFactor,
                 // style: TextStyle(color: Color.fromARGB(255, 5, 30, 62)),
                 style: GoogleFonts.montserrat(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 20,
                 ),
               ),
               Image.asset('assets/disc.png', width: 45)
@@ -302,3 +306,40 @@ class DiscordJoin extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+class CmReliefFund extends StatelessWidget {
+  const CmReliefFund({
+    Key key,
+  }) : super(key: key);
+  final double textScaleFactor = 1;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        String upiurl =
+            'upi://pay?pa=cyril199897@oksbi&pn=SenderName&tn=THanks&am=100&cu=INR';
+        await launch(upiurl);
+        // String upiurl = 'https://discord.gg/Kce6chxm';
+        // await launch(upiurl);
+      },
+      child: Container(
+        color: Colors.blueGrey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Text(
+                "Donate for a good cause",
+                textScaleFactor: textScaleFactor,
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+>>>>>>> 9e23ae7eca778216a2a21892476ebcfe8319b0f5
