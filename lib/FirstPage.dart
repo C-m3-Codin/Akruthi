@@ -24,6 +24,9 @@ class _MyAppState extends State<MyApp> {
   List<StreamingEvents> list = [];
   List<RegEvent> regularEvent = [];
   QuerySnapshot querySnapshot;
+
+  double textScaleFactor = 0.9;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -163,6 +166,7 @@ class _MyAppState extends State<MyApp> {
         child: Center(
           child: Text(
             "Events ${regularEvent.length}",
+            textScaleFactor: textScaleFactor,
             style: GoogleFonts.abrilFatface(fontSize: 20, color: Colors.white),
           ),
         ),
@@ -185,6 +189,7 @@ class EachEvent extends StatelessWidget {
 
   final List<RegEvent> list;
   final int ind;
+  final double textScaleFactor = 0.95;
 
   @override
   Widget build(BuildContext context) {
@@ -239,9 +244,12 @@ class EachEvent extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
                           child: Text(
-                            list[ind].eventName,
+                            list[ind].eventName.toUpperCase(),
+                            textScaleFactor: textScaleFactor,
                             style: GoogleFonts.montserrat(
-                                color: Colors.black, fontSize: 10.0
+                                color: Colors.black,
+                                fontSize: 14.0,
+                                letterSpacing: 1.1
                                 // fontSize: 15,
                                 ),
                           ),
@@ -263,7 +271,7 @@ class DiscordJoin extends StatelessWidget {
   const DiscordJoin({
     Key key,
   }) : super(key: key);
-
+  final double textScaleFactor = 1;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -284,11 +292,11 @@ class DiscordJoin extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                " Join Discord ",
+                " Join Discord ", textScaleFactor: textScaleFactor,
                 // style: TextStyle(color: Color.fromARGB(255, 5, 30, 62)),
                 style: GoogleFonts.montserrat(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 20,
                 ),
               ),
               Image.asset('assets/disc.png', width: 45)
@@ -302,7 +310,7 @@ class CmReliefFund extends StatelessWidget {
   const CmReliefFund({
     Key key,
   }) : super(key: key);
-
+  final double textScaleFactor = 1;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -321,7 +329,8 @@ class CmReliefFund extends StatelessWidget {
             Container(
               child: Text(
                 "Donate for a good cause",
-                style: TextStyle(color: Colors.white, fontSize: 10),
+                textScaleFactor: textScaleFactor,
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             )
           ],

@@ -53,6 +53,9 @@ Future<void> main() async {
 class MApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyApp());
+    return MaterialApp(
+      home: MyApp(),
+      darkTheme: ThemeData.dark(),
+    );
   }
 }

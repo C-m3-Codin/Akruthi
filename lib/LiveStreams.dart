@@ -62,6 +62,7 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                       ),
                       widget.list[index].happening == "Yes"
                           ? Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 SizedBox(
                                   width: 10,
@@ -70,28 +71,16 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Container(
                                     color: Colors.red,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          "LIVE ",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        ),
-                                        // Icon(
-                                        //   Icons.live_tv,
-                                        //   color: Colors.white,
-                                        // ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                      ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0, vertical: 2.0),
+                                      child: Text(
+                                        " LIVE ",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
                                     ),
                                   ),
                                 ),
