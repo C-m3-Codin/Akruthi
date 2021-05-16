@@ -1,6 +1,7 @@
 import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:akruthi/main.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -53,11 +54,10 @@ class _HorizontalImagesState extends State<HorizontalImages> {
                         children: <Widget>[
                           Center(child: CircularProgressIndicator()),
                           Center(
-                            child: FadeInImage.memoryNetwork(
-                              placeholder: kTransparentImage,
-                              image: widget.list[index].imageUrl,
-                            ),
-                          ),
+                              child: Image(
+                            image: CachedNetworkImageProvider(
+                                widget.list[index].imageUrl),
+                          )),
                         ],
                       ),
                       widget.list[index].happening == "Yes"

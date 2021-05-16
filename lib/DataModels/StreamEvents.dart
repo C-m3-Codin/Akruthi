@@ -19,7 +19,8 @@ class StreamingEvents {
       this.eventRedirect,
       this.happening,
       this.redirectUrl,
-      this.time});
+      this.time,
+      this.order});
 
   String eventName;
   String streamTime;
@@ -29,6 +30,7 @@ class StreamingEvents {
   String happening;
   String redirectUrl;
   Timestamp time;
+  int order;
 
   factory StreamingEvents.fromJson(Map<String, dynamic> json) =>
       StreamingEvents(
@@ -40,6 +42,7 @@ class StreamingEvents {
           eventRedirect: json["EventRedirect"],
           time: json["time"],
           happening: json["Happening"],
+          order: json["order"],
           redirectUrl: json["RedirectUrl"]);
 
   Map<String, dynamic> toJson() => {

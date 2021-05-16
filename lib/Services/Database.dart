@@ -44,7 +44,7 @@ Future<List<StreamingEvents>> streamingEvents() async {
   String happening = "No";
   await FirebaseFirestore.instance
       .collection("StreamEvents")
-      .orderBy("time", descending: false)
+      .orderBy("order", descending: false)
       .get()
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
