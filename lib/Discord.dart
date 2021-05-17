@@ -20,7 +20,7 @@ class DiscordJoin extends StatelessWidget {
               primary: Color.fromARGB(255, 255, 167, 0)),
           // primary: Color.fromARGB(255, 238, 64, 53)),
           onPressed: () async {
-            String upiurl = 'https://discord.gg/795n5nhP';
+            String upiurl = 'https://discord.com/invite/PUw3Skbt';
             await launch(upiurl);
           },
           child: Row(

@@ -1,5 +1,6 @@
 import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
+import 'package:akruthi/Discord.dart';
 import 'package:akruthi/Donate.dart';
 import 'package:akruthi/EventPage.dart';
 import 'package:akruthi/main.dart';
@@ -139,6 +140,40 @@ class _MyAppState extends State<MyApp> {
                             eventHeader(),
 
                             gridViewEvents(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                    onTap: () async {
+                                      await launch(
+                                          "https://www.instagram.com/ekayana.cce/");
+                                    },
+                                    child: Image.asset('assets/insta.png',
+                                        width: 35)),
+                                GestureDetector(
+                                    onTap: () async {
+                                      await launch(
+                                          "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                    },
+                                    child: Image.asset('assets/yt.png',
+                                        width: 35)),
+                                GestureDetector(
+                                    onTap: () async {
+                                      await launch(
+                                          "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                    },
+                                    child: Image.asset('assets/fb.png',
+                                        width: 35)),
+                                // Image.asset('assets/insta.png', width: 35),
+                                // Image.asset('assets/yt.png', width: 35)
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
                           ],
                         )))),
           ]));
@@ -265,45 +300,6 @@ class EachEvent extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DiscordJoin extends StatelessWidget {
-  const DiscordJoin({
-    Key key,
-  }) : super(key: key);
-  final double textScaleFactor = 1;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-      child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              elevation: 20,
-              shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(10.0),
-              ),
-              primary: Color.fromARGB(255, 255, 167, 0)),
-          // primary: Color.fromARGB(255, 238, 64, 53)),
-          onPressed: () async {
-            String upiurl = 'https://discord.gg/795n5nhP';
-            await launch(upiurl);
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                " Join Discord ", textScaleFactor: textScaleFactor,
-                // style: TextStyle(color: Color.fromARGB(255, 5, 30, 62)),
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-              Image.asset('assets/disc.png', width: 45)
-            ],
-          )),
     );
   }
 }

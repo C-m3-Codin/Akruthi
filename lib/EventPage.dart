@@ -39,6 +39,8 @@ class _EventPageState extends State<EventPage> {
   Future getSheetData() async {
     print("should come first");
 
+    print("\n\n\n\n\n\n\n\n\nHere we${widget.event.sheet}");
+
     await http.get(Uri.parse(
         // "https://script.google.com/macros/s/AKfycbyWh0-nnI1Q5M2LHXjPYxe6SEzPma1KMyu9duTWWXKe_4P3G4cKmL0e0BFWTnrFFASacg/exec")
 
