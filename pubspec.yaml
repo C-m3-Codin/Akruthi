@@ -45,6 +45,7 @@ dependencies:
   google_fonts: ^2.1.0
   auto_size_text: ^2.1.0
   flutter_screenutil: ^0.3.0
+  confetti: ^0.5.5
   # flutter pub add auto_size_text
 
 dev_dependencies:

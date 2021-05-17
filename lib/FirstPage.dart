@@ -1,3 +1,4 @@
+import 'package:akruthi/Confetti.dart';
 import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:akruthi/Discord.dart';
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       streamingEvents().then((value) {
@@ -93,14 +95,16 @@ class _MyAppState extends State<MyApp> {
         : SafeArea(
             child: Stack(children: <Widget>[
             Image.asset(
-              "assets/back3.jpeg",
+              easter,
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
             Scaffold(
                 // backgroundColor: Color.fromARGB(255, 37, 30, 62),
-                backgroundColor: Colors.black,
+                backgroundColor: easter == "assets/back.jpg"
+                    ? Colors.black
+                    : Colors.transparent,
                 // backgroundColor: Color.fromARGB(255, 1, 31, 75),
                 floatingActionButton: FloatingActionButton(
                   // backgroundColor: Colors.yellow[700],
@@ -132,7 +136,6 @@ class _MyAppState extends State<MyApp> {
                             ),
                             eventHeader(),
                             gridViewEvents(),
-<<<<<<< HEAD
                             SizedBox(
                               height: 10,
                             ),
@@ -167,19 +170,6 @@ class _MyAppState extends State<MyApp> {
                             SizedBox(
                               height: 10,
                             ),
-=======
-                            Row(
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      launch(
-                                          'https://www.instagram.com/ccetinsta/');
-                                    },
-                                    child: Image.network(
-                                        'http://assets.stickpng.com/images/580b57fcd9996e24bc43c521.png'))
-                              ],
-                            )
->>>>>>> d600553af82b48075be0bbbe2545ae12655b0c44
                           ],
                         )))),
           ]));
@@ -198,6 +188,9 @@ class _MyAppState extends State<MyApp> {
       // main
       // Generate 100 widgets that display their index in the List.
       children: List.generate(regularEvent.length, (index) {
+        // if()
+        print(
+            "\n\n\n\n list generate event ${regularEvent[index].eventName}\n\n\n\n");
         return EachEvent(list: regularEvent, ind: index);
       }),
     );
@@ -246,9 +239,13 @@ class EachEvent extends StatelessWidget {
 
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  EventPage(event: list[ind], eventDeets: eventDeets)),
+          MaterialPageRoute(builder: (context) {
+            if (list[ind].sheet == "asd") {
+              return Conf();
+            }
+
+            return EventPage(event: list[ind], eventDeets: eventDeets);
+          }),
         );
       },
       child: Center(

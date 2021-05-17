@@ -4,6 +4,7 @@ import 'package:akruthi/DataModels/StreamEvents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:akruthi/main.dart';
 
 class DatabaseServices {
   FirebaseFirestore db = FirebaseFirestore.instance;
@@ -52,24 +53,6 @@ Future<List<StreamingEvents>> streamingEvents() async {
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
       print(element.data()['title']);
-      // if (happening == "No") {
-      //   print(
-      //       "\n\n\n\nchecking ${element.data()["Happening"]}      ${element.data()["EventName"]}\n\n\n\n");
-      //   if (element.data()["Happening"] == "Yes") {
-      //     happening = "Yes";
-      //     print(
-      //         "\n\n\n\n\nadded to event ${element.data()["EventName"]}\n\n\n\n");
-      //     streamEventList.add(
-      //         // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
-      //         StreamingEvents.fromJson(element.data()));
-      //   }
-      // } else {
-      //   print(
-      //       "\n\n\n\n\nadded to event ${element.data()["EventName"]}\n\n\n\n");
-      //   streamEventList.add(
-      //       // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
-      //       StreamingEvents.fromJson(element.data()));
-      // }
 
       if (element.data()["order"] == 0) {
         starting = element.data()["starting"];
@@ -105,8 +88,18 @@ Future<List<RegEvent>> generalEventList() async {
       .then((querysnapshot) {
     querysnapshot.docs.forEach((element) {
       print("\n\n\n\n\n${element.data().toString()}\n\n\n\n\n\n");
-      // print(element.data()['title']);
-      regularEvent.add(RegEvent.fromJson(element.data()));
+
+      if (element.id == "easterEgg") {
+        if (element.data()["active"] == "Yes") {
+          print(
+              "\n\n\n\n\n\n\n\n\n\n\n\n\\\nnnn\\n\n\n\n\n\\\n\n\n\n\n\n\nEaster active");
+          easter = element.data()["background"];
+          print("\n\n\n\n easter Egg ${element.data()["Surprise"]}\n\n\n\n");
+          regularEvent.add(RegEvent.fromJson(element.data()));
+        }
+      } else {
+        regularEvent.add(RegEvent.fromJson(element.data()));
+      }
     });
   });
 
