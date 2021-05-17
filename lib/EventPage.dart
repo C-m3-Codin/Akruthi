@@ -43,6 +43,7 @@ class _EventPageState extends State<EventPage> {
         // "https://script.google.com/macros/s/AKfycbyWh0-nnI1Q5M2LHXjPYxe6SEzPma1KMyu9duTWWXKe_4P3G4cKmL0e0BFWTnrFFASacg/exec")
 
         widget.event.sheet)).then((raw) {
+      print(widget.event.sheet);
       var jsonEvent = convert.jsonDecode(raw.body);
       eventDetails = EventDetails.fromJson(jsonEvent);
       print(eventDetails.name);
@@ -124,7 +125,7 @@ class _EventPageState extends State<EventPage> {
               backgroundColor: bgColor,
               elevation: 5,
               insetPadding:
-                  EdgeInsets.symmetric(horizontal: 36, vertical: height * .10),
+                  EdgeInsets.symmetric(horizontal: 24, vertical: height * .10),
               child: SingleChildScrollView(
                 child: Container(
                   // color: Theme.of(context).cardColor,
@@ -263,280 +264,285 @@ class _EventPageState extends State<EventPage> {
     return Stack(children: <Widget>[
       Scaffold(
           backgroundColor: bgColor,
-          body: !loadingComplete
-              ? Container(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: tileColor,
+          body: SafeArea(
+            child: RefreshIndicator(
+              onRefresh: getSheetData,
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                children: [
+                  Visibility(
+                    visible: widget.event.imageUrl.isNotEmpty,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Container(
+                        height: height * .65,
+                        width: width,
+                        decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            image: new DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                  widget.event.imageUrl,
+                                ),
+                                // new NetworkImage(widget.event.imageUrl),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
-                )
-              : SafeArea(
-                  child: RefreshIndicator(
-                    onRefresh: getSheetData,
-                    child: ListView(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      children: [
-                        Visibility(
-                          visible: widget.event.imageUrl.isNotEmpty,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Container(
-                              height: height * .65,
-                              width: width,
-                              decoration: new BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  image: new DecorationImage(
-                                      image: CachedNetworkImageProvider(
-                                        widget.event.imageUrl,
-                                      ),
-                                      // new NetworkImage(widget.event.imageUrl),
-                                      fit: BoxFit.cover)),
+                  !loadingComplete
+                      ? Container(
+                          child: Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 24.0),
+                              child: CircularProgressIndicator(
+                                backgroundColor: tileColor,
+                              ),
                             ),
                           ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.name.isNotEmpty,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            child: Text(
-                              eventDetails.name,
-                              textScaleFactor: textScaleFactor,
-                              style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                  color: tileColor),
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.date.isNotEmpty,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0),
-                                  child: Icon(
-                                    Icons.date_range,
-                                    size: 18,
-                                  ),
-                                ),
-                                Text(
-                                  eventDetails.date,
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Visibility(
+                              visible: eventDetails.name.isNotEmpty,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5),
+                                child: Text(
+                                  eventDetails.name,
                                   textScaleFactor: textScaleFactor,
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                      color: tileColor),
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: eventDetails.date.isNotEmpty,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      child: Icon(
+                                        Icons.date_range,
+                                        size: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      eventDetails.date,
+                                      textScaleFactor: textScaleFactor,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: eventDetails.description.isNotEmpty,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                child: Text(
+                                  eventDetails.description,
+                                  textScaleFactor: textScaleFactor,
+                                  style: TextStyle(
+                                      fontSize: 20,
                                       fontWeight: FontWeight.normal,
                                       color: Colors.white),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.description.isNotEmpty,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: Text(
-                              eventDetails.description,
-                              textScaleFactor: textScaleFactor,
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        // Text(
-                        //   'Rules',
-                        //   textAlign: TextAlign.left,
-                        //   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                        // ),
-                        TextButton(
-                          onPressed: eventDetails.resultsAnnounced == 'yes'
-                              ? resultDialog
-                              : () {},
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: ListTile(
-                              trailing: eventDetails.resultsAnnounced == 'no'
-                                  ? Icon(Icons.close, color: Colors.black)
-                                  : Icon(Icons.check, color: Colors.black),
-                              leading: Icon(
-                                Icons.multiple_stop,
-                                color: iconColor,
                               ),
-                              title: Text(
-                                'RESULTS',
-                                // textScaleFactor: textScaleFactor,
-                                style: TextStyle(
-                                    fontSize: fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: tileTextColor),
-                              ),
-                              tileColor: tileColor,
                             ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.rules.isNotEmpty,
-                          child: TextButton(
-                            onPressed: rulesDialog,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.rule,
-                                  color: iconColor,
+                            TextButton(
+                              onPressed: eventDetails.resultsAnnounced == 'yes'
+                                  ? resultDialog
+                                  : () {},
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: ListTile(
+                                  trailing: eventDetails.resultsAnnounced ==
+                                          'no'
+                                      ? Icon(Icons.close, color: Colors.black)
+                                      : Icon(Icons.check, color: Colors.black),
+                                  leading: Icon(
+                                    Icons.multiple_stop,
+                                    color: iconColor,
+                                  ),
+                                  title: Text(
+                                    'RESULTS',
+                                    // textScaleFactor: textScaleFactor,
+                                    style: TextStyle(
+                                        fontSize: fontSize,
+                                        fontWeight: FontWeight.bold,
+                                        color: tileTextColor),
+                                  ),
+                                  tileColor: tileColor,
                                 ),
-                                title: AutoSizeText(
-                                  'RULES AND REGULATIONS ',
-                                  style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      color: tileTextColor),
-                                  maxLines: 1,
-                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: eventDetails.rules.isNotEmpty,
+                              child: TextButton(
+                                onPressed: rulesDialog,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.rule,
+                                      color: iconColor,
+                                    ),
+                                    title: AutoSizeText(
+                                      'RULES AND REGULATIONS ',
+                                      style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: tileTextColor),
+                                      maxLines: 1,
+                                    ),
 
-                                // Text(
-                                //   'RULES AND REGULATIONS',
-                                //   textScaleFactor: textScaleFactor,
-                                //   style: TextStyle(
-                                //       fontSize: 20,
-                                //       fontWeight: FontWeight.bold,
-                                //       color: tileTextColor),
-                                // ),
-                                // tileColor: Theme.of(context).backgroundColor,
-                                tileColor: tileColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.participants.isNotEmpty,
-                          child: TextButton(
-                            onPressed: participantsDialog,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.multiple_stop,
-                                  color: iconColor,
-                                ),
-                                title: Text(
-                                  'PARTICIPANTS',
-                                  // textScaleFactor: textScaleFactor,
-                                  style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      color: tileTextColor),
-                                ),
-                                tileColor: tileColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.coordinator1.isNotEmpty,
-                          child: TextButton(
-                            onPressed: null,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.person,
-                                  color: iconColor,
-                                ),
-                                title: AutoSizeText(
-                                  eventDetails.coordinator1.toUpperCase(),
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      color: tileTextColor),
-                                ),
-                                trailing: Visibility(
-                                  visible: eventDetails.c2Number.isNotEmpty,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                          icon: Icon(Icons.call,
-                                              color: iconColor),
-                                          onPressed: () {
-                                            _launchURL('tel:+91' +
-                                                eventDetails.c1Number);
-                                          }),
-                                      IconButton(
-                                          icon: Icon(Icons.message,
-                                              color: iconColor),
-                                          onPressed: () {
-                                            _launchURL('https://wa.me/+91' +
-                                                eventDetails.c1Number);
-                                          }),
-                                    ],
+                                    // Text(
+                                    //   'RULES AND REGULATIONS',
+                                    //   textScaleFactor: textScaleFactor,
+                                    //   style: TextStyle(
+                                    //       fontSize: 20,
+                                    //       fontWeight: FontWeight.bold,
+                                    //       color: tileTextColor),
+                                    // ),
+                                    // tileColor: Theme.of(context).backgroundColor,
+                                    tileColor: tileColor,
                                   ),
                                 ),
-                                tileColor: tileColor,
                               ),
                             ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: eventDetails.coordinator2.isNotEmpty,
-                          child: TextButton(
-                            onPressed: null,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.person,
-                                  color: iconColor,
-                                ),
-                                title: AutoSizeText(
-                                  eventDetails.coordinator2.toUpperCase(),
-                                  maxLines: 1,
-                                  // textScaleFactor: textScaleFactor,
-                                  // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
-                                  style: TextStyle(
-                                      fontSize: fontSize,
-                                      fontWeight: FontWeight.bold,
-                                      color: tileTextColor),
-                                ),
-                                trailing: Visibility(
-                                  visible: eventDetails.c2Number.isNotEmpty,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                          icon: Icon(Icons.call,
-                                              color: iconColor),
-                                          onPressed: () {
-                                            _launchURL('tel:+91' +
-                                                eventDetails.c2Number);
-                                          }),
-                                      IconButton(
-                                          icon: Icon(Icons.message,
-                                              color: iconColor),
-                                          onPressed: () {
-                                            _launchURL('https://wa.me/+91' +
-                                                eventDetails.c2Number);
-                                          }),
-                                    ],
+                            Visibility(
+                              visible: eventDetails.participants.isNotEmpty,
+                              child: TextButton(
+                                onPressed: participantsDialog,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.multiple_stop,
+                                      color: iconColor,
+                                    ),
+                                    title: Text(
+                                      'PARTICIPANTS',
+                                      // textScaleFactor: textScaleFactor,
+                                      style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: tileTextColor),
+                                    ),
+                                    tileColor: tileColor,
                                   ),
                                 ),
-                                tileColor: tileColor,
                               ),
                             ),
-                          ),
+                            Visibility(
+                              visible: eventDetails.coordinator1.isNotEmpty,
+                              child: TextButton(
+                                onPressed: null,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.person,
+                                      color: iconColor,
+                                    ),
+                                    title: AutoSizeText(
+                                      eventDetails.coordinator1.toUpperCase(),
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: tileTextColor),
+                                    ),
+                                    trailing: Visibility(
+                                      visible: eventDetails.c2Number.isNotEmpty,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                              icon: Icon(Icons.call,
+                                                  color: iconColor),
+                                              onPressed: () {
+                                                _launchURL('tel:+91' +
+                                                    eventDetails.c1Number);
+                                              }),
+                                          IconButton(
+                                              icon: Icon(Icons.message,
+                                                  color: iconColor),
+                                              onPressed: () {
+                                                _launchURL('https://wa.me/+91' +
+                                                    eventDetails.c1Number);
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    tileColor: tileColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: eventDetails.coordinator2.isNotEmpty,
+                              child: TextButton(
+                                onPressed: null,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      Icons.person,
+                                      color: iconColor,
+                                    ),
+                                    title: AutoSizeText(
+                                      eventDetails.coordinator2.toUpperCase(),
+                                      maxLines: 1,
+                                      // textScaleFactor: textScaleFactor,
+                                      // "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
+                                      style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: tileTextColor),
+                                    ),
+                                    trailing: Visibility(
+                                      visible: eventDetails.c2Number.isNotEmpty,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          IconButton(
+                                              icon: Icon(Icons.call,
+                                                  color: iconColor),
+                                              onPressed: () {
+                                                _launchURL('tel:+91' +
+                                                    eventDetails.c2Number);
+                                              }),
+                                          IconButton(
+                                              icon: Icon(Icons.message,
+                                                  color: iconColor),
+                                              onPressed: () {
+                                                _launchURL('https://wa.me/+91' +
+                                                    eventDetails.c2Number);
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    tileColor: tileColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ))
+                ],
+              ),
+            ),
+          ))
     ]);
   }
 }

@@ -122,23 +122,26 @@ class _MyAppState extends State<MyApp> {
                           children: [
                             CmReliefFund(),
                             HorizontalImages(list: list),
-
                             SizedBox(
                               height: height * .010,
                             ),
-
                             DiscordJoin(),
-
-                            // DiscordJoin(),
-                            //   ],
-                            // ),
                             SizedBox(
                               height: height * .010,
                             ),
-
                             eventHeader(),
-
                             gridViewEvents(),
+                            Row(
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      launch(
+                                          'https://www.instagram.com/ccetinsta/');
+                                    },
+                                    child: Image.network(
+                                        'http://assets.stickpng.com/images/580b57fcd9996e24bc43c521.png'))
+                              ],
+                            )
                           ],
                         )))),
           ]));
@@ -230,7 +233,6 @@ class EachEvent extends StatelessWidget {
                       // child:
                       Container(
                         color: Colors.blue,
-
                         child: Center(
                           child: Image(
 
@@ -240,15 +242,13 @@ class EachEvent extends StatelessWidget {
                               ),
                               fit: BoxFit.cover),
                         ),
-
-//
                       ),
-
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(
                           child: AutoSizeText(
                             list[ind].eventName.toUpperCase(),
+                            maxLines: 1,
                             style: GoogleFonts.montserrat(
                                 color: Colors.black, fontSize: 15.0
                                 // fontSize: 15,
