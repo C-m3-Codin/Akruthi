@@ -99,8 +99,8 @@ class _MyAppState extends State<MyApp> {
             ),
             Scaffold(
                 // backgroundColor: Color.fromARGB(255, 37, 30, 62),
-                // backgroundColor: Colors.black,
-                backgroundColor: Color.fromARGB(255, 1, 31, 75),
+                backgroundColor: Colors.black,
+                // backgroundColor: Color.fromARGB(255, 1, 31, 75),
                 floatingActionButton: FloatingActionButton(
                   // backgroundColor: Colors.yellow[700],
 
@@ -174,7 +174,7 @@ class _MyAppState extends State<MyApp> {
           child: Text(
             "Events ${regularEvent.length}",
             style: GoogleFonts.abrilFatface(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
