@@ -3,7 +3,10 @@
    <application
           android:name=".Application"
         android:label="akruthi"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
+        
 
 <!-- intent added here -->
 
