@@ -26,29 +26,95 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<StreamingEvents> list = [];
-  List<RegEvent> regularEvent = [];
+  List<RegEvent> regularEvent;
   QuerySnapshot querySnapshot;
 
   double textScaleFactor = 0.9;
+
+  Future getSheetData() async {
+    print("should come first");
+
+    await streamingEvents().then((value) {
+      list = value;
+      // setState(() {});
+    }).then((_) async {
+      await generalEventList().then((value) {
+        regularEvent = value;
+        setState(() {});
+      });
+    });
+    print("last");
+    print(list[0].eventName);
+  }
+
+  // Future<List<StreamingEvents>> streamingEvents() async {
+  //   int starting = 99;
+  //   List<StreamingEvents> streamEventList = [];
+  //   // print(postPath);
+  //   print("\n\n");
+  //   String happening = "No";
+  //   await FirebaseFirestore.instance
+  //       .collection("StreamEvents")
+  //       .orderBy("order", descending: false)
+  //       .get()
+  //       .then((querysnapshot) {
+  //     querysnapshot.docs.forEach((element) {
+  //       print(element.data()['title']);
+
+  //       if (element.data()["order"] == 0) {
+  //         starting = element.data()["starting"];
+  //         happening = element.data()["started"];
+  //       }
+  //       if (element.data()["order"] >= starting) {
+  //         if (starting == element.data()["order"]) {
+  //           StreamingEvents a = StreamingEvents.fromJson(element.data());
+  //           a.happening = happening;
+  //           streamEventList.add(a);
+  //         } else {
+  //           streamEventList.add(
+  //               // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
+  //               StreamingEvents.fromJson(element.data()));
+  //           print(
+  //               "\n\n\n\n\n\nretruning and adding${element.data().toString()};");
+  //         }
+  //       }
+  //     });
+  //   });
+
+  //   // print('retrieved: ${postFromFirebase.eventName}');
+  //   return streamEventList;
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
 
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      streamingEvents().then((value) {
-        list = value;
-        setState(() {});
-      });
+    // SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    //   streamingEvents().then((value) {
+    //     list = value;
+    //     setState(() {});
+    //   });
 
-      print("done List");
+    //   print("done List");
 
-      generalEventList().then((value) {
-        regularEvent = value;
-        setState(() {});
-      });
-    });
+    // generalEventList().then((value) {
+    //   regularEvent = value;
+    //   setState(() {});
+
+    // });
+    // });
+
+    streamingEvents().then((val) {
+      list = val;
+    }).then((value) => {
+          generalEventList().then((value) {
+            regularEvent = value;
+            setState(() {});
+          })
+        });
+
+    // BakerStreet
 
     var initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -100,78 +166,82 @@ class _MyAppState extends State<MyApp> {
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
-            Scaffold(
-                // backgroundColor: Color.fromARGB(255, 37, 30, 62),
-                backgroundColor: easter == "assets/back.jpg"
-                    ? Colors.black
-                    : Colors.transparent,
-                // backgroundColor: Color.fromARGB(255, 1, 31, 75),
-                floatingActionButton: FloatingActionButton(
-                  // backgroundColor: Colors.yellow[700],
+            RefreshIndicator(
+              onRefresh: getSheetData,
+              child: Scaffold(
+                  // backgroundColor: Color.fromARGB(255, 37, 30, 62),
+                  backgroundColor: easter == "assets/back.jpg"
+                      ? Colors.black
+                      : Colors.transparent,
+                  // backgroundColor: Color.fromARGB(255, 1, 31, 75),
+                  floatingActionButton: FloatingActionButton(
+                    // backgroundColor: Colors.yellow[700],
 
-                  child: CircleAvatar(
-                    backgroundColor: Colors.yellow[900],
-                    radius: 100,
-                    child: Image.asset('assets/prize.png', width: 30),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.yellow[900],
+                      radius: 100,
+                      child: Image.asset('assets/prize.png', width: 30),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ScoreCard()));
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ScoreCard()));
-                  },
-                ),
-                body: Container(
-                    padding: EdgeInsets.all(1),
-                    child: new SingleChildScrollView(
-                        physics: ScrollPhysics(),
-                        child: Column(
-                          children: [
-                            CmReliefFund(),
-                            HorizontalImages(list: list),
-                            SizedBox(
-                              height: height * .010,
-                            ),
-                            DiscordJoin(),
-                            SizedBox(
-                              height: height * .010,
-                            ),
-                            eventHeader(),
-                            gridViewEvents(),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                    onTap: () async {
-                                      await launch(
-                                          "https://www.instagram.com/ekayana.cce/");
-                                    },
-                                    child: Image.asset('assets/insta.png',
-                                        width: 35)),
-                                GestureDetector(
-                                    onTap: () async {
-                                      await launch(
-                                          "https://www.youtube.com/watch?v=7xdt3z85hu4");
-                                    },
-                                    child: Image.asset('assets/yt.png',
-                                        width: 35)),
-                                GestureDetector(
-                                    onTap: () async {
-                                      await launch(
-                                          "https://www.youtube.com/watch?v=7xdt3z85hu4");
-                                    },
-                                    child: Image.asset('assets/fb.png',
-                                        width: 35)),
-                                // Image.asset('assets/insta.png', width: 35),
-                                // Image.asset('assets/yt.png', width: 35)
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        )))),
+                  body: Container(
+                      padding: EdgeInsets.all(1),
+                      child: new SingleChildScrollView(
+                          physics: ScrollPhysics(),
+                          child: Column(
+                            children: [
+                              CmReliefFund(),
+                              HorizontalImages(list: list),
+                              SizedBox(
+                                height: height * .010,
+                              ),
+                              DiscordJoin(),
+                              SizedBox(
+                                height: height * .010,
+                              ),
+                              eventHeader(),
+                              gridViewEvents(),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () async {
+                                        await launch(
+                                            "https://www.instagram.com/ekayana.cce/");
+                                      },
+                                      child: Image.asset('assets/insta.png',
+                                          width: 35)),
+                                  GestureDetector(
+                                      onTap: () async {
+                                        await launch(
+                                            "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                      },
+                                      child: Image.asset('assets/yt.png',
+                                          width: 35)),
+                                  GestureDetector(
+                                      onTap: () async {
+                                        await launch(
+                                            "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                      },
+                                      child: Image.asset('assets/fb.png',
+                                          width: 35)),
+                                  // Image.asset('assets/insta.png', width: 35),
+                                  // Image.asset('assets/yt.png', width: 35)
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          )))),
+            ),
           ]));
   }
 
