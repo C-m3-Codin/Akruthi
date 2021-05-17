@@ -47,63 +47,11 @@ class _MyAppState extends State<MyApp> {
     print(list[0].eventName);
   }
 
-  // Future<List<StreamingEvents>> streamingEvents() async {
-  //   int starting = 99;
-  //   List<StreamingEvents> streamEventList = [];
-  //   // print(postPath);
-  //   print("\n\n");
-  //   String happening = "No";
-  //   await FirebaseFirestore.instance
-  //       .collection("StreamEvents")
-  //       .orderBy("order", descending: false)
-  //       .get()
-  //       .then((querysnapshot) {
-  //     querysnapshot.docs.forEach((element) {
-  //       print(element.data()['title']);
-
-  //       if (element.data()["order"] == 0) {
-  //         starting = element.data()["starting"];
-  //         happening = element.data()["started"];
-  //       }
-  //       if (element.data()["order"] >= starting) {
-  //         if (starting == element.data()["order"]) {
-  //           StreamingEvents a = StreamingEvents.fromJson(element.data());
-  //           a.happening = happening;
-  //           streamEventList.add(a);
-  //         } else {
-  //           streamEventList.add(
-  //               // StreamingEvents.fromJson(json.decode(json.encode(element.data()))));
-  //               StreamingEvents.fromJson(element.data()));
-  //           print(
-  //               "\n\n\n\n\n\nretruning and adding${element.data().toString()};");
-  //         }
-  //       }
-  //     });
-  //   });
-
-  //   // print('retrieved: ${postFromFirebase.eventName}');
-  //   return streamEventList;
-  // }
-
   @override
   void initState() {
     // TODO: implement initState
 
     super.initState();
-    // SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-    //   streamingEvents().then((value) {
-    //     list = value;
-    //     setState(() {});
-    //   });
-
-    //   print("done List");
-
-    // generalEventList().then((value) {
-    //   regularEvent = value;
-    //   setState(() {});
-
-    // });
-    // });
 
     streamingEvents().then((val) {
       list = val;
