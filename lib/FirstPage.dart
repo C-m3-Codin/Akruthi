@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
         : SafeArea(
             child: Stack(children: <Widget>[
             Image.asset(
-              "assets/white2.jpg",
+              "assets/back3.jpeg",
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
