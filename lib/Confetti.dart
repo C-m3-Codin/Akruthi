@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:akruthi/DataModels/RegEvent.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Conf extends StatefulWidget {
+  Conf({this.surprise});
+  RegEvent surprise;
   @override
   _ConfState createState() => _ConfState();
 }
@@ -75,131 +78,137 @@ class _ConfState extends State<Conf> {
     _controllerCenterLeft.play();
     _controllerTopCenter.play();
     _controllerBottomCenter.play();
-    return Stack(
-      children: <Widget>[
-        //CENTER -- Blast
-        Align(
-          alignment: Alignment.center,
-          child: ConfettiWidget(
-            confettiController: _controllerCenter,
-            blastDirectionality: BlastDirectionality
-                .explosive, // don't specify a direction, blast randomly
-            shouldLoop:
-                true, // start again as soon as the animation is finished
-            colors: const [
-              Colors.green,
-              Colors.blue,
-              Colors.pink,
-              Colors.orange,
-              Colors.purple
-            ], // manually specify the colors to be used
-            createParticlePath: drawStar, // define a custom shape/path.
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          //CENTER -- Blast
+          Align(
+            alignment: Alignment.center,
+            child: ConfettiWidget(
+              confettiController: _controllerCenter,
+              blastDirectionality: BlastDirectionality
+                  .explosive, // don't specify a direction, blast randomly
+              shouldLoop:
+                  true, // start again as soon as the animation is finished
+              colors: const [
+                Colors.green,
+                Colors.blue,
+                Colors.pink,
+                Colors.orange,
+                Colors.purple
+              ], // manually specify the colors to be used
+              createParticlePath: drawStar, // define a custom shape/path.
+            ),
           ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: ElevatedButton(
-              onPressed: () {
-                // _controllerCenter.play();
-                launch('https://wa.me/+919207585032');
-              },
-              child: Text('Send in your name')),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                  onPressed: () {
+                    // _controllerCenter.play();
+                    launch('https://wa.me/+919207585032');
+                  },
+                  child: Text(widget.surprise.sheet +
+                      "....First come First Serve....")),
+            ),
+          ),
 
-        //CENTER RIGHT -- Emit left
-        Align(
-          alignment: Alignment.centerRight,
-          child: ConfettiWidget(
-            confettiController: _controllerCenterRight,
-            blastDirection: pi, // radial value - LEFT
-            particleDrag: 0.05, // apply drag to the confetti
-            emissionFrequency: 0.05, // how often it should emit
-            numberOfParticles: 20, // number of particles to emit
-            gravity: 0.05, // gravity - or fall speed
-            shouldLoop: false,
-            colors: const [
-              Colors.green,
-              Colors.blue,
-              Colors.pink
-            ], // manually specify the colors to be used
+          //CENTER RIGHT -- Emit left
+          Align(
+            alignment: Alignment.centerRight,
+            child: ConfettiWidget(
+              confettiController: _controllerCenterRight,
+              blastDirection: pi, // radial value - LEFT
+              particleDrag: 0.05, // apply drag to the confetti
+              emissionFrequency: 0.05, // how often it should emit
+              numberOfParticles: 20, // number of particles to emit
+              gravity: 0.05, // gravity - or fall speed
+              shouldLoop: false,
+              colors: const [
+                Colors.green,
+                Colors.blue,
+                Colors.pink
+              ], // manually specify the colors to be used
+            ),
           ),
-        ),
-        // Align(
-        //   alignment: Alignment.centerRight,
-        //   child: FlatButton(
-        //       onPressed: () {
-        //         _controllerCenterRight.play();
-        //       },
-        //       child: _display('pump left')),
-        // ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: FlatButton(
+                onPressed: () {
+                  // _controllerCenterRight.play();
+                },
+                child: Text("Easter Egg Discovered")),
+          ),
 
-        //CENTER LEFT - Emit right
-        Align(
-          alignment: Alignment.centerLeft,
-          child: ConfettiWidget(
-            confettiController: _controllerCenterLeft,
-            blastDirection: 0, // radial value - RIGHT
-            emissionFrequency: 0.6,
-            minimumSize: const Size(10,
-                10), // set the minimum potential size for the confetti (width, height)
-            maximumSize: const Size(50,
-                50), // set the maximum potential size for the confetti (width, height)
-            numberOfParticles: 1,
-            gravity: 0.1,
+          //CENTER LEFT - Emit right
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ConfettiWidget(
+              confettiController: _controllerCenterLeft,
+              blastDirection: 0, // radial value - RIGHT
+              emissionFrequency: 0.6,
+              minimumSize: const Size(10,
+                  10), // set the minimum potential size for the confetti (width, height)
+              maximumSize: const Size(50,
+                  50), // set the maximum potential size for the confetti (width, height)
+              numberOfParticles: 1,
+              gravity: 0.1,
+            ),
           ),
-        ),
-        // Align(
-        //   alignment: Alignment.centerLeft,
-        //   child: FlatButton(
-        //       onPressed: () {
-        //         _controllerCenterLeft.play();
-        //       },
-        //       child: _display('singles')),
-        // ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: FlatButton(
+          //       onPressed: () {
+          //         _controllerCenterLeft.play();
+          //       },
+          //       child: _display('singles')),
+          // ),
 
-        //TOP CENTER - shoot down
-        Align(
-          alignment: Alignment.topCenter,
-          child: ConfettiWidget(
-            confettiController: _controllerTopCenter,
-            blastDirection: pi / 2,
-            maxBlastForce: 5, // set a lower max blast force
-            minBlastForce: 2, // set a lower min blast force
-            emissionFrequency: 0.05,
-            numberOfParticles: 50, // a lot of particles at once
-            gravity: 1,
+          //TOP CENTER - shoot down
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: _controllerTopCenter,
+              blastDirection: pi / 2,
+              maxBlastForce: 5, // set a lower max blast force
+              minBlastForce: 2, // set a lower min blast force
+              emissionFrequency: 0.05,
+              numberOfParticles: 50, // a lot of particles at once
+              gravity: 1,
+            ),
           ),
-        ),
-        // Align(
-        //   alignment: Alignment.topCenter,
-        //   child: FlatButton(
-        //       onPressed: () {
-        //         _controllerTopCenter.play();
-        //       },
-        //       child: _display('goliath')),
-        // ),
-        //BOTTOM CENTER
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: ConfettiWidget(
-            confettiController: _controllerBottomCenter,
-            blastDirection: -pi / 2,
-            emissionFrequency: 0.01,
-            numberOfParticles: 20,
-            maxBlastForce: 100,
-            minBlastForce: 80,
-            gravity: 0.3,
-          ),
-        )
-        // Align(
-        //       alignment: Alignment.bottomCenter,
-        //       child: FlatButton(
-        //           onPressed: () {
-        //             _controllerBottomCenter.play();
-        //           },
-        //           child: _display('hard and infrequent')),
-        //     ),
-      ],
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: FlatButton(
+          //       onPressed: () {
+          //         _controllerTopCenter.play();
+          //       },
+          //       child: _display('goliath')),
+          // ),
+          //BOTTOM CENTER
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ConfettiWidget(
+              confettiController: _controllerBottomCenter,
+              blastDirection: -pi / 2,
+              emissionFrequency: 0.01,
+              numberOfParticles: 20,
+              maxBlastForce: 100,
+              minBlastForce: 80,
+              gravity: 0.3,
+            ),
+          )
+          // Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: FlatButton(
+          //           onPressed: () {
+          //             _controllerBottomCenter.play();
+          //           },
+          //           child: _display('hard and infrequent')),
+          //     ),
+        ],
+      ),
     );
   }
 

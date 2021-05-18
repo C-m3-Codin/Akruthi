@@ -255,8 +255,8 @@ class EachEvent extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            if (list[ind].sheet == "asd") {
-              return Conf();
+            if (list[ind].eventName == "Lucky You") {
+              return Conf(surprise: list[ind]);
             }
 
             return EventPage(event: list[ind], eventDeets: eventDeets);
