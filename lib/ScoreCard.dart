@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:akruthi/main.dart';
+// import 'package:main.dart';
 
 import 'DataModels/ScoreCardModel.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ScoreCard extends StatefulWidget {
   @override
@@ -15,10 +18,7 @@ class _ScoreCardState extends State<ScoreCard> {
   List<Score> scores = [];
   Future getSheetData() async {
     print("sending req");
-    return await http
-        .get(Uri.parse(
-            "https://script.google.com/macros/s/AKfycbxKzG3NC8DxA3YSinP89KQrEowKCg59cDdb6Klu6iocUHQGuY9k_Xj_GTLggoUxWQpu/exec"))
-        .then((raw) {
+    return await http.get(Uri.parse(resultUrl)).then((raw) {
       // print(raw.body);
 
       scores =
