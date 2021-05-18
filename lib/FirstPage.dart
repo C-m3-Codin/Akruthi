@@ -169,14 +169,14 @@ class _MyAppState extends State<MyApp> {
                                   GestureDetector(
                                       onTap: () async {
                                         await launch(
-                                            "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                            "https://youtube.com/channel/UCMTDFQUbaH8O0VyNHB-HD3A");
                                       },
                                       child: Image.asset('assets/yt.png',
                                           width: 35)),
                                   GestureDetector(
                                       onTap: () async {
                                         await launch(
-                                            "https://www.youtube.com/watch?v=7xdt3z85hu4");
+                                            "https://www.facebook.com/cceijk");
                                       },
                                       child: Image.asset('assets/fb.png',
                                           width: 35)),
