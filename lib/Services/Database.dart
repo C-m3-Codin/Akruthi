@@ -55,6 +55,7 @@ Future<List<StreamingEvents>> streamingEvents() async {
       print(element.data()['title']);
 
       if (element.data()["order"] == 0) {
+        resultUrl = element.data()['results'];
         starting = element.data()["starting"];
         happening = element.data()["started"];
       }

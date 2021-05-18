@@ -22,7 +22,7 @@ class _DonateImageState extends State<DonateImage> {
             ),
             onPressed: () async {
               String upiurl =
-                  'upi://pay?pa=cyril199897@oksbi&pn=SenderName&cu=INR';
+                  'upi://pay?pa=nidhalsaleem@okaxis&pn=SenderName&am=100&cu=INR';
               await launch(upiurl);
 //
               // String upiurl = 'https://discord.gg/Kce6chxm';
