@@ -2,8 +2,6 @@
 //
 //     final streamingEvents = streamingEventsFromJson(jsonString);
 
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // StreamingEvents streamingEventsFromJson(String str) =>StreamingEvents.fromJson(json.decode(str));

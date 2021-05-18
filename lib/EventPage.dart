@@ -1,14 +1,11 @@
 import 'package:akruthi/DataModels/EventDetail.dart';
 import 'package:akruthi/DataModels/RegEvent.dart';
-import 'package:akruthi/Services/Database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventPage extends StatefulWidget {
   EventPage({this.event, this.eventDeets});
