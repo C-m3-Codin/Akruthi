@@ -465,7 +465,7 @@ class _EventPageState extends State<EventPage> {
                                           color: tileTextColor),
                                     ),
                                     trailing: Visibility(
-                                      visible: eventDetails.c2Number.isNotEmpty,
+                                      visible: eventDetails.c1Number.isNotEmpty,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
