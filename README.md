@@ -1,4 +1,4 @@
-# akruthi
+# Akruthi
 
 A new Flutter project for the Ekanya E-Fest -Akruthi.
 
